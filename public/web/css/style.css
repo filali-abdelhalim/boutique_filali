@@ -1,0 +1,108 @@
+
+body{
+    background-image: url(../naturel.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    display:flex;
+    flex-direction: column;
+    min-height: 100vh;
+    
+}
+h5{
+    text-align: center;
+    color: red;
+    text-transform: uppercase;
+    background-color: lightseagreen;
+}
+form{
+    margin: 10px 100px 20px 100px;
+    background-color: rgb(220, 228, 111);
+}
+
+.form-check-label{
+    display: flex;
+    text-align: right;
+}
+/* .boutton{
+   display: flex;   
+   justify-content: center;
+   align-content: center;
+   align-items: center;
+} */
+
+footer{
+    display: inline-flex;
+    flex-direction: row;
+    width:100%;
+    justify-content: center;  /* text-align: center; */
+    background-color:rgb(196, 226, 218);
+    /* margin: 0px 0px 0px 0px ; */
+}  
+
+footer p{
+    font-size: 15px;
+    text-align: left;
+    font-weight: bold;
+}  
+.sociaux{
+    margin: 5px 1px 0px 1px;
+    width: 30px;
+    height: 30px;
+}
+.container {
+    flex: auto;
+    /* height: 100%; */
+    margin: 100px 0px 0px 0px ;
+}
+.carousel-inner {
+  height: 570px;
+  margin: 0px 0px 10px 0px ;
+
+
+  
+}
+.row {
+    animation-duration: 5s;
+    animation-name: slidein;
+    /* animation-iteration-count: infinite; */
+    /* animation-direction: alternate; */
+  }
+
+@keyframes slidein {
+    from {
+      margin-right: 100%;
+    }
+  
+    to {
+      margin-left: 50%;
+
+    }
+  }
+
+section p {
+    color: red;
+    text-transform: capitalize;
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+    background-color: rgb(196, 226, 218);
+    /* justify-content: center; */
+    animation-duration: 5s;
+    animation-name: slidein;
+    /* animation-iteration-count: infinite; */
+    animation-direction: alternate;
+}
+
+@keyframes slidein {
+from {
+  margin-right: 50%;
+}
+
+to {
+  margin-left: 50%;
+
+}
+}

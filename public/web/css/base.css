@@ -1,0 +1,96 @@
+body{
+   /* background-image: url(https://corsicacom.cc/wp-content/uploads/2017/01/salle1-copie-665x361.jpg); */
+   /* background-image: url(https://cdn.radiofrance.fr/s3/cruiser-production/2019/06/56950efa-8f38-40b7-b462-eb6dee53eb24/640_cinema5.jpg); */
+   color : black; 
+   background-color:white;
+   background-repeat: no-repeat;
+   background-size: cover;
+   margin: 0;
+   padding: 0;
+   font-family: Georgia, 'Times New Roman', Times, serif;
+   display:flex;
+   flex-direction: column;
+   min-height: 100vh;
+
+}
+
+header{
+   height: 35px;
+   color : white; 
+   background-color:black;
+}
+
+.recherche{
+   color: black;
+   background-color:rgb(235, 231, 231);
+}
+.connexion{
+   padding-left: 30px;
+   margin-left:700px ;
+   width: 300px;
+   height: 250px;
+   border: 1px;
+   background-color: rgb(236, 234, 234);
+}
+.creer_compte{
+   padding-top: 30px;
+   padding-left: 50px;
+   margin-left: 200px;
+   width: 700px;
+   height: 500px;
+   border: 1px;
+   background-color:rgb(230, 230, 225);
+}
+.ceration_films{
+   margin-left: 200px;
+   padding-left: 30px;
+   width: 400px;
+   height: 500px;
+   border: 1px;
+   background-color: rgb(219, 228, 142);
+}
+.section{
+   margin-left: 800px;
+
+}
+.botton{
+   background-color: black;
+   border: 0px;
+   color:white;
+   text-align: none;
+
+}
+
+.espace{
+   background-image: url(https://previews.123rf.com/images/jagcz/jagcz1602/jagcz160200056/52004683-r%C3%A9tro-accessoires-encore-la-vie-de-production-cin%C3%A9matographique-concept-du-cin%C3%A9ma-fum%C3%A9e-effet-sur-fond.jpg);
+
+   height: 100%;  
+   flex: auto;
+   margin-bottom: 10px;
+
+}
+
+
+footer{
+   display: inline-flex;
+   flex-direction: row;
+   width:100%;
+   /* justify-content: center;  */
+   text-align: center;
+   color :black; 
+   background-color : rgb(216, 211, 211);
+   padding-right: 900px ;
+   left: 0;
+    bottom: 0;
+    height: 30px;
+
+}
+.sociaux{
+   margin: 0px 0px 0px 20px;
+   width: 20px;
+   height: 20px;
+}
+.carousel-inner {
+   height: 570px;
+   margin: 0px 0px 10px 0px ;
+}

@@ -42,7 +42,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 class ArticleController extends AbstractController
 {
     /**
-     * @Route("/accueil", name="home")
+     * @Route("/", name="home")
      * @param ArticleRepository $articleRepository
      * @return Response 
      */
@@ -54,12 +54,18 @@ class ArticleController extends AbstractController
         $form = $this->createForm(SearchForm::class, $data);
 
         $form->handleRequest($request);
+        $categories = isset($_GET['categorie']) ? $_GET['categorie'] : [];
+        dump($categories);
         
-
-        // $article = $articleRepository->findSearch($data);
+        if ($data->q !== null || $data->min !== null || $data->max !== null || $categories !== []) {
+            $articles = $articleRepository->findSearchArticles($data->q, $data->min, $data->max, $categories);
+        } else {
+            $articles = $articleRepository->findAll();
+        }
+        //$article = $articleRepository->findSearch($data);
 
                    
-        return $this->render('article/affiche.html.twig', [ 'articles' => $articleRepository->findAll(),
+        return $this->render('article/affiche.html.twig', [ 'articles' => $articles,
         'form'=>$form->createView(), ] );
     }
    

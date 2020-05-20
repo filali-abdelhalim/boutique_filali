@@ -39,6 +39,10 @@ class CaddyController extends AbstractController
         $TVA = $total * 20/100 ;
         $totalGenerale = $total + $TVA; 
 
+        // dump($panierData);
+        // dump($total) ;
+        // exit();
+
         return $this->render('caddy/index.html.twig', ['panier' => $panierData, 'total'=> $total,
          'tva'=> $TVA, 'generale'=>$totalGenerale]);
     }

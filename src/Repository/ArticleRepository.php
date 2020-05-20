@@ -20,48 +20,31 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
    /**
-    * @return Article[] Returns an array of Article objects
-    */
-   
-    public function findSearch(SearchData $search):array
+     * @return Articles[]
+     */
+    public function findSearchArticles($name, $min, $max, $categories): array
     {
-        
-        $query = $this
-                ->createQueryBuilder('a')
-                ->select('c', 'a')
-                ->join('a.categories', 'c');
+        dump($categories);
+        $qb = $this->createQueryBuilder('p')
+            ->where('p.nomArt LIKE :name')
+            ->setParameter('name', '%' . $name . '%')
+            ->orderBy('p.prix_initial', 'ASC');
 
-    if (!empty($search->q)) {
-        $query = $query
-            ->andWhere('a.nomArt LIKE :q')
-            ->setParameter('q', "%{$search->q}%");
+        if ($categories !== []) {
+            $qb->andWhere('p.categorie IN (:categories)')
+                ->setParameter('categories', $categories);
+        }
+        if ($min !== null) {
+            $qb->andWhere('p.prix_initial >= :min')
+                ->setParameter('min', $min);
+        }
+        if ($max !== null) {
+            $qb->andWhere('p.prix_initial <= :max')
+                ->setParameter('max', $max);
+        }
+        $query = $qb->getQuery();
 
-    }
-    if (!empty($search->min)) {
-        $query = $query
-            ->andWhere('a.prix >= :min')
-            ->setParameter('min', $search->min);
-    }
-
-    if (!empty($search->max)) {
-        $query = $query
-            ->andWhere('a.prix <= :max')
-            ->setParameter('max', $search->max);
-    }
-
-    if (!empty($search->promo)) {
-        $query = $query
-            ->andWhere('a.promo = 1');
-    }
-
-    if (!empty($search->categorie)) {
-        $query = $query
-            ->andWhere('c.id IN (:categorie)')
-            ->setParameter('categorie', $search->categorie);
-    }
-
-        return $query->getQuery()->getResult();
-
+        return $query->execute();
     }
     
 

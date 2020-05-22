@@ -55,14 +55,13 @@ class ArticleController extends AbstractController
 
         $form->handleRequest($request);
         $categories = isset($_GET['categorie']) ? $_GET['categorie'] : [];
-        dump($categories);
+       
         
-        if ($data->q !== null || $data->min !== null || $data->max !== null || $categories !== []) {
-            $articles = $articleRepository->findSearchArticles($data->q, $data->min, $data->max, $categories);
+        if ($data->q !== null || $data->min !== null || $data->max !== null || $categories !== [] || $data->promo !== false ) {
+            $articles = $articleRepository->findSearchArticles($data->q, $data->min, $data->max, $categories,$data->promo);
         } else {
             $articles = $articleRepository->findAll();
         }
-        //$article = $articleRepository->findSearch($data);
 
                    
         return $this->render('article/affiche.html.twig', [ 'articles' => $articles,
@@ -73,7 +72,7 @@ class ArticleController extends AbstractController
      
 
     /**
-     * @Route("/article", name="ajouter_article")
+     * @Route("/admin/article", name="ajouter_article")
      */
     public function index(Request $request): Response
     {
@@ -156,7 +155,7 @@ class ArticleController extends AbstractController
     }
 
      /**
-     * @Route("article/{id}/edit", name="article_edit")
+     * @Route("admin/article/{id}/edit", name="article_edit")
      * @param Article $article
      * @param Request $request
      * @return Response
@@ -180,7 +179,7 @@ class ArticleController extends AbstractController
 
     
     /**
-     * @Route("/article/{id}/delete", name="article_delete")
+     * @Route("admin/article/{id}/delete", name="article_delete")
      * @param Article $article
      * @return RedirectResponse
      */

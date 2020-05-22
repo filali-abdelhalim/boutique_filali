@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class MarqueController extends AbstractController
 {
     /**
-     * @Route("/marque", name="ajouter_marque")
+     * @Route("/admin/marque", name="ajouter_marque")
      */
      
     public function index(Request $request):Response 

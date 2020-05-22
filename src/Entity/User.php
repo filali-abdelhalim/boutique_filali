@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\EqualTo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -12,8 +13,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(
- *  fields={"email},
- *  message="l emial que vous avez indiqué et deja utilise !"
+ * fields={"email"}, 
+ * message="l email que vous avez indiqué et deja utilise !"
  * )
  */
 class User implements UserInterface 
@@ -38,16 +39,20 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\lenght(min="8" , minMessage="votre mot de passe doit faire minimum 8 caracters ")
-     * @Assert\EqualTo(propertypath="confirme_password", message="vous n'avez pas tapé le meme mot de passe")
+     * @Assert\Length(min="8" , minMessage="votre mot de passe doit faire minimum 8 caracters ")
      */
     private $password;
 
      /**
-      * @Assert\EqualTo(propertypath="password", message="vous n'avez pas tapé le meme mot de passe")
+      * @Assert\EqualTo(propertyPath="password", message="vous n'avez pas tapé le meme mot de passe")
       */
 
     public $confirme_password;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
 
     public function getId(): ?int
     {
@@ -100,9 +105,25 @@ class User implements UserInterface
 
     }
 
-    public function getRoles()
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
     {
-        return ['ROLE_USER'];
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
     }
-   
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    
+    
 }

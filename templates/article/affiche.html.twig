@@ -37,16 +37,19 @@
                                     <p class="card-text">{{ art.Description|slice(0, 50) }}...</p>
                                     <div class="card-body">
                                         <p class="card-text text-primary" style="font-weight: bold; font-size: 1.5rem;">{{ art.PrixInitial }} € </p>
-                                            {% if art.Promo %}
                                             <p class="text card-text text-warning">{{ art.Promo }} </p>
-                                            {% endif %}
                                         <p class="card-text text-primary" style="font-weight: bold; font-size: 1.5rem;">{{ art.PrixFinal }} € </p>
 
                                             {# <div class="btn-group"> #}
+
                                                 <a href="{{ path('article_show', {"id": art.id}) }}" class="btn btn-sm btn-outline-secondary">Voir</a>
+                                                <a href="{{ path('caddy_add', {"id": art.id}) }} " class="btn btn-success btn-sm"><i class="fas fa-shopping-cart mr-1"></i> Ajouter au panier </a>
+
+                                                 {% if is_granted('ROLE_ADMIN') %} 
                                                 <a href="{{ path('article_edit', {"id": art.id}) }}" class="btn btn-sm btn-outline-secondary">Editer</a>
                                                 <a href="{{ path('article_delete', {"id": art.id}) }}" class="btn btn-sm btn-outline-secondary" onclick="return confirm('Attention ce ci va supprimer l\'article selectionnez')">Supprimer</a>
-                                                <a href="{{ path('caddy_add', {"id": art.id}) }} " class="btn btn-success btn-sm"><i class="fas fa-shopping-cart mr-1"></i> Ajouter au panier </a>
+                                                 {% endif %}
+                                            
                                             {# </div> #}
                                     </div>
                                 </div>

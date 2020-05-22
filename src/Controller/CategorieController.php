@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategorieController extends AbstractController
 {
     /**
-     * @Route("/categorie", name="ajouter_categorie")
+     * @Route("/admin/categorie", name="ajouter_categorie")
      */
     public function index(Request $request):Response 
         {

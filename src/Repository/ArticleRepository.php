@@ -22,9 +22,8 @@ class ArticleRepository extends ServiceEntityRepository
    /**
      * @return Articles[]
      */
-    public function findSearchArticles($name, $min, $max, $categories): array
+    public function findSearchArticles($name, $min, $max, $categories, $promo): array
     {
-        dump($categories);
         $qb = $this->createQueryBuilder('p')
             ->where('p.nomArt LIKE :name')
             ->setParameter('name', '%' . $name . '%')
@@ -41,6 +40,10 @@ class ArticleRepository extends ServiceEntityRepository
         if ($max !== null) {
             $qb->andWhere('p.prix_initial <= :max')
                 ->setParameter('max', $max);
+        }
+        if ($promo !== false) {
+            $qb->andWhere('p.promo  :promo')
+                ->setParameter('promo', $promo);
         }
         $query = $qb->getQuery();
 

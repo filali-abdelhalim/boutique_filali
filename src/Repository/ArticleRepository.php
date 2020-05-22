@@ -34,15 +34,15 @@ class ArticleRepository extends ServiceEntityRepository
                 ->setParameter('categories', $categories);
         }
         if ($min !== null) {
-            $qb->andWhere('p.prix_initial >= :min')
+            $qb->andWhere('p.prix_final >= :min')
                 ->setParameter('min', $min);
         }
         if ($max !== null) {
-            $qb->andWhere('p.prix_initial <= :max')
+            $qb->andWhere('p.prix_final <= :max')
                 ->setParameter('max', $max);
         }
         if ($promo !== false) {
-            $qb->andWhere('p.promo  :promo')
+            $qb->andWhere('p.promo = ?1')
                 ->setParameter('promo', $promo);
         }
         $query = $qb->getQuery();

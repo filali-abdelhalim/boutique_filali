@@ -8,13 +8,16 @@
   <div class="col-md-4">
         <p class="card-text"> {{article.NomArt}} </p>
             <div class="card mb-3 shadow-sm">
+             {% if article.Promo %} 
+                        <p class="text card-text text-warning">En promotion </p>
+             {% endif %}
                     <img src="{{ article.Image }}" class="d-block w-50 h-50" alt="{{article.NomArt}}">
                 <div class="card-body">
                     <p class="card-text">{{ article.Description|slice(0, 50) }}...</p>
                     <div class="card-body">
-                        <p class="card-text text-primary" style="font-weight: bold; font-size: 1.5rem;">{{ article.PrixInitial }} € </p>
-                        <p class="card-text">{{ article.Promo }} </p>
-                        <p class="card-text text-primary" style="font-weight: bold; font-size: 1.5rem;">{{ article.PrixFinal }} € </p>
+                        <p class="card-text text-primary" style="font-weight: bold; font-size: 1.5rem;">{{ article.PrixInitial }} € HT </p>
+                   
+                        <p class="card-text text-primary" style="font-weight: bold; font-size: 1.5rem;">{{ article.PrixFinal }} € TTC </p>
 
                     </div>
                     <a href="{{ path('caddy_add', {"id": article.id}) }}" class="btn btn-success float-right"><i class="fas fa-shopping-cart mr-1"></i> Ajouter au panier </a>

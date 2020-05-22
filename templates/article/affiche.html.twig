@@ -32,13 +32,17 @@
                         <div class="col-md-3">
                         <p class="card-text"> {{art.NomArt}} </p>
                             <div class="card mb-1 shadow-sm">
+                        {% if art.Promo %} 
+                             <p class="text card-text text-warning">En promotion </p>
+                        {% endif %}
+
                                  <img src="{{ art.Image }}" class="d-block w-50 h-50" alt="{{art.NomArt}}">
                                 <div class="card-body">
                                     <p class="card-text">{{ art.Description|slice(0, 50) }}...</p>
                                     <div class="card-body">
-                                        <p class="card-text text-primary" style="font-weight: bold; font-size: 1.5rem;">{{ art.PrixInitial }} € </p>
-                                            <p class="text card-text text-warning">{{ art.Promo }} </p>
-                                        <p class="card-text text-primary" style="font-weight: bold; font-size: 1.5rem;">{{ art.PrixFinal }} € </p>
+                                        <p class="card-text text-primary" style="font-weight: bold; font-size: 1.5rem;">{{ art.PrixInitial }} € HT </p>
+                                   
+                                        <p class="card-text text-primary" style="font-weight: bold; font-size: 1.5rem;">{{ art.PrixFinal }} € TTC </p>
 
                                             {# <div class="btn-group"> #}
 

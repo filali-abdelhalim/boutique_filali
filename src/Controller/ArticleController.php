@@ -88,8 +88,9 @@ class ArticleController extends AbstractController
                 ->add('prix_initial', MoneyType::class,
                 ["attr" => ["class" => "form-control"]])
 
-                ->add('promo', TextType::class, 
-                ["attr" => ["class" => "form-control"]])  
+                ->add('promo', CheckboxType::class, 
+                ['label' => 'En promotion',
+                 'required' => false,])
 
                 ->add('prix_final', MoneyType::class,
                 ["attr" => ["class" => "form-control"]])

@@ -39,7 +39,7 @@ class Article
     private $prix_initial;
 
     /**
-     * @ORM\Column(type="string",length=255,nullable=true)
+     * @ORM\Column(type="boolean")
      */
     private $promo;
 

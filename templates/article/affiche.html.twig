@@ -1,67 +1,69 @@
 
 {% extends 'base.html.twig' %}
 
-{% block title %} tout les produit !{% endblock %}
-
-
+{% block title %} tout les produites !{% endblock %}
 
 
 {% block body %}
 
+
 <style>
+       
     .filter { position: sticky; display: block ; top: 20px; }
 </style>
 
   {# <main role="main"> #}
 
-      <h1>tout les produits disponible  ! ✅</h1>
+      <h1>tout les produites disponibles  ! ✅</h1>
 
-             {# <div class="album py-2 bg-light"> #}
-                <div class="container">
+            <div class="container">
                 
-                    <div class="row">
+                <div class="row" >
+                
+                 {# pour separer le filter  #}
 
-                    {# pour separer le filter  #}
-
-                        <div class="col-md-3 bg-light ">  
+                        <div class="col-md-3 bg-light d-inline">  
 
                             {% include 'article/filter.html.twig' with {form : form} only %} 
                         </div>
 
+        {# <div class="bg-light displayList" > #}
+       
+
         {% for art in articles %}
-                        <div class="col-md-3">
-                        <p class="card-text"> {{art.NomArt}} </p>
-                            <div class="card mb-1 shadow-sm">
-                        {% if art.Promo %} 
-                             <p class="text card-text text-warning">En promotion </p>
-                        {% endif %}
+                <div class="col-md-3">
+                <p class="card-text"> {{art.NomArt}} </p>
+                    <div class="card mb-1 shadow-sm">
+                {% if art.Promo %} 
+                        <p class="text card-text text-warning">En promotion </p>
+                {% endif %}
 
-                                 <img src="{{ art.Image }}" class="d-block w-50 h-50" alt="{{art.NomArt}}">
-                                <div class="card-body">
-                                    <p class="card-text">{{ art.Description|slice(0, 50) }}...</p>
-                                    <div class="card-body">
-                                        <p class="card-text text-primary" style="font-weight: bold; font-size: 1.5rem;">{{ art.PrixInitial }} € HT </p>
-                                   
-                                        <p class="card-text text-primary" style="font-weight: bold; font-size: 1.5rem;">{{ art.PrixFinal }} € TTC </p>
+                    <img src="{{ art.Image }}" class="d-block w-50 h-50" alt="{{art.NomArt}}">
+                        <div class="card-body">
+                            <p class="card-text">{{ art.Description|slice(0, 50) }}...</p>
+                            <div class="card-body">
+                                <p class="card-text text-primary" style="font-weight: bold; font-size: 1.5rem;">{{ art.PrixInitial | number_format(0,',',' ') }} € HT </p>
+                            
+                                <p class="card-text text-primary" style="font-weight: bold; font-size: 1.5rem;">{{ art.PrixFinal | number_format(0,',',' ')}}  € TTC </p>
 
-                                            {# <div class="btn-group"> #}
+                                    {# <div class="btn-group"> #}
 
-                                                <a href="{{ path('article_show', {"id": art.id}) }}" class="btn btn-sm btn-outline-secondary">Voir</a>
-                                                <a href="{{ path('caddy_add', {"id": art.id}) }} " class="btn btn-success btn-sm"><i class="fas fa-shopping-cart mr-1"></i> Ajouter au panier </a>
+                                        <a href="{{ path('article_show', {"id": art.id}) }}" class="btn btn-sm btn-outline-secondary">Voir</a>
+                                        <a href="{{ path('caddy_add', {"id": art.id}) }} " class="btn btn-success btn-sm"><i class="fas fa-shopping-cart mr-1"></i> Ajouter au panier </a>
 
-                                                 {% if is_granted('ROLE_ADMIN') %} 
-                                                <a href="{{ path('article_edit', {"id": art.id}) }}" class="btn btn-sm btn-outline-secondary">Editer</a>
-                                                <a href="{{ path('article_delete', {"id": art.id}) }}" class="btn btn-sm btn-outline-secondary" onclick="return confirm('Attention ce ci va supprimer l\'article selectionnez')">Supprimer</a>
-                                                 {% endif %}
-                                            
-                                            {# </div> #}
-                                    </div>
-                                </div>
+                                            {% if is_granted('ROLE_ADMIN') %} 
+                                        <a href="{{ path('article_edit', {"id": art.id}) }}" class="btn btn-sm btn-outline-secondary">Editer</a>
+                                        <a href="{{ path('article_delete', {"id": art.id}) }}" class="btn btn-sm btn-outline-secondary" onclick="return confirm('Attention ce ci va supprimer l\'article selectionnez')">Supprimer</a>
+                                            {% endif %}
+                                    
+                                    {# </div> #}
                             </div>
                         </div>
-                                                       
-
+                    </div>
+                </div>
+                                                
         {% endfor %}
+                      {# </div> #}
                     </div>
                 </div>
 

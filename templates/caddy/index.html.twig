@@ -34,9 +34,9 @@
             <tr>
             {# <img src="{{ Art.article.Image }}" class="d-block w-50 h-50"> #}
                 <td> {{ Art.article.NomArt}}    </td>
-                <td> {{ Art.article.PrixInitial}} </td>
+                <td> {{ Art.article.PrixInitial }} </td>
                 <td> {{ Art.quantité}} </td>
-                <td> {{ Art.article.PrixInitial * Art.quantité }} </td>
+                <td> {{ Art.article.PrixInitial  * Art.quantité  }} </td>
                 <td> 
                 <a href="{{ path('caddy_remove',{"id": Art.article.id}) }}" class="btn btn-danger btn-sm"> <i class="fas f-trash"><i/></a>
                 </td>
@@ -55,15 +55,15 @@
     <tfoot>
             <tr>
                <td colspan="3" class="text-right"> Total HT: </td>
-               <td> {{ total}} € </td>
+               <td> {{ total | number_format(0,',',' ') }} € </td>
             </tr>
              <tr>
                <td colspan="3" class="text-right"> TVA: </td>
-               <td> {{ tva}} € </td>
+               <td> {{ tva | number_format(0,',',' ') }} € </td>
             </tr>
             <tr>
                <td colspan="3" class="text-right"> Total TTC: </td>
-               <td> {{ generale }} € </td>
+               <td> {{ generale | number_format(0,',',' ') }} € </td>
             </tr>
      </tfoot>      
 

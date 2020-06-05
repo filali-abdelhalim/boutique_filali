@@ -24,6 +24,10 @@ class SecurityController extends AbstractController
      UserPasswordEncoderInterface $encoder)
     {
         $user = new User();
+
+        //if ($user->id)
+       
+
         $form = $this->createForm(RegistrationType::class, $user);
 
         $form->handleRequest($request);

@@ -55,10 +55,12 @@ class ArticleController extends AbstractController
 
         $form->handleRequest($request);
         $categories = isset($_GET['categorie']) ? $_GET['categorie'] : [];
+        $marques = isset($_GET['marque']) ? $_GET['marque'] : [];
+
        
         
-        if ($data->q !== null || $data->min !== null || $data->max !== null || $categories !== [] || $data->promo !== false ) {
-            $articles = $articleRepository->findSearchArticles($data->q, $data->min, $data->max, $categories,$data->promo);
+        if ($data->q !== null || $data->min !== null || $data->max !== null || $categories !== [] || $marques !== [] || $data->promo !== false ) {
+            $articles = $articleRepository->findSearchArticles($data->q, $data->min, $data->max, $categories,$marques, $data->promo);
         } else {
             $articles = $articleRepository->findAll();
         }

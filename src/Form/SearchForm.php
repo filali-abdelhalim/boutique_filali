@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Categorie;
+use App\Entity\Marque;
+
 use App\Data\SearchData;
 
 use Symfony\Component\Form\AbstractType;
@@ -34,6 +36,13 @@ class SearchForm extends AbstractType
                     'label' => false,
                     'required' => false,
                     'class' => Categorie::class,
+                    'expanded' => true,
+                    'multiple' => true
+                ])
+                ->add('marque', EntityType::class, [
+                    'label' => false,
+                    'required' => false,
+                    'class' => Marque::class,
                     'expanded' => true,
                     'multiple' => true
                 ])

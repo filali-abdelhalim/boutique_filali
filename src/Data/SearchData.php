@@ -17,6 +17,11 @@ class SearchData
      */
     public $categorie = [];
 
+     /**
+     * @var Marque[]
+     */
+    public $marque = [];
+
     /**
      * @var null|integer
      */

@@ -14,18 +14,36 @@ class RegistrationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+         $user = new User();
+        // dd($user);
+
+       
+       
         $builder
             ->add('email')
             ->add('username')
             ->add('password' , PasswordType::class)
-            ->add('confirme_password', PasswordType::class)
-            ->add('roles', ChoiceType::class, [
+            ->add('confirme_password', PasswordType::class);
+
+            // ->add('roles', ChoiceType::class, [
+            //     'choices'  => [
+            //         'Role Admin' => true,
+            //         'Role user' => true, 
+            //     ],
+               
+            // ]);
+
+             if ($user->getId() !==  null) {
+              $builder->add('roles', ChoiceType::class, [
                 'choices'  => [
                     'Role Admin' => true,
                     'Role user' => true, 
                 ],
                
             ]);
+            
+        }
+       
     }
 
     public function configureOptions(OptionsResolver $resolver)

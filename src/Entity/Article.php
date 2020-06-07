@@ -58,6 +58,11 @@ class Article
      */
     private $image;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Commande", inversedBy="articles")
+     */
+    private $commande;
+
     
     public function getNomArt()
     {
@@ -204,6 +209,18 @@ class Article
     public function setPromo($promo)
     {
         $this->promo = $promo;
+
+        return $this;
+    }
+
+    public function getCommande(): ?Commande
+    {
+        return $this->commande;
+    }
+
+    public function setCommande(?Commande $commande): self
+    {
+        $this->commande = $commande;
 
         return $this;
     }

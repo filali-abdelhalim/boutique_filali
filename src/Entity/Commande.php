@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,11 +28,7 @@ class Commande
      */
     private $livree;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Client", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $client;
+
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Facture", cascade={"persist", "remove"})
@@ -39,10 +37,10 @@ class Commande
     private $facture;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Article")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="commandes")
+     * @ORM\JoinColumn(nullable=false)
      */
-
-    private $article;
+    private $client;
 
     public function getId(): ?int
     {
@@ -73,45 +71,6 @@ class Commande
         return $this;
     }
 
-    /**
-     * Get the value of article
-     */ 
-    public function getArticle()
-    {
-        return $this->article;
-    }
-
-    /**
-     * Set the value of article
-     *
-     * @return  self
-     */ 
-    public function setArticle($article)
-    {
-        $this->article = $article;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of client
-     */ 
-    public function getClient()
-    {
-        return $this->client;
-    }
-
-    /**
-     * Set the value of client
-     *
-     * @return  self
-     */ 
-    public function setClient($client)
-    {
-        $this->client = $client;
-
-        return $this;
-    }
 
     /**
      * Get the value of facture
@@ -132,4 +91,18 @@ class Commande
 
         return $this;
     }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): self
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+
 }

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,11 +33,6 @@ class Client
      */
     private $date_de_naissance;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -57,17 +54,23 @@ class Client
      */
     private $telephone;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $username;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Commande", mappedBy="client")
+     */
+    private $commandes;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="client", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $pwd;
+    private $user;
+
+
+    public function __construct()
+    {
+        $this->commandes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -110,17 +113,6 @@ class Client
         return $this;
     }
 
-    public function getEmail(): ?User
-    {
-        return $this->email;
-    }
-
-    public function setEmail(User $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
 
     public function getAdresse(): ?string
     {
@@ -169,28 +161,50 @@ class Client
 
         return $this;
     }
+  
 
-    public function getUsername(): ?User
+    /**
+     * @return Collection|Commande[]
+     */
+    public function getCommandes(): Collection
     {
-        return $this->username;
+        return $this->commandes;
     }
 
-    public function setUsername(User $username): self
+    public function addCommande(Commande $commande): self
     {
-        $this->username = $username;
+        if (!$this->commandes->contains($commande)) {
+            $this->commandes[] = $commande;
+            $commande->setClient($this);
+        }
 
         return $this;
     }
 
-    public function getPwd(): ?User
+    public function removeCommande(Commande $commande): self
     {
-        return $this->pwd;
-    }
-
-    public function setPwd(User $pwd): self
-    {
-        $this->pwd = $pwd;
+        if ($this->commandes->contains($commande)) {
+            $this->commandes->removeElement($commande);
+            // set the owning side to null (unless already changed)
+            if ($commande->getClient() === $this) {
+                $commande->setClient(null);
+            }
+        }
 
         return $this;
     }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+
 }

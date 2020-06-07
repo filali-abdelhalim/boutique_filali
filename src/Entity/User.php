@@ -54,6 +54,13 @@ class User implements UserInterface
      */
     private $roles = [];
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Client", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $client;
+
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -123,6 +130,24 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(Client $client): self
+    {
+        $this->client = $client;
+
+        // set the owning side of the relation if necessary
+        if ($client->getUser() !== $this) {
+            $client->setUser($this);
+        }
+
+        return $this;
+    }
+
 
     
     

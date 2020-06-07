@@ -23,7 +23,9 @@ class RegistrationType extends AbstractType
             ->add('email')
             ->add('username')
             ->add('password' , PasswordType::class)
-            ->add('confirme_password', PasswordType::class);
+            ->add('confirme_password', PasswordType::class)
+            ->add('client', ClientType::class);
+            
 
             // ->add('roles', ChoiceType::class, [
             //     'choices'  => [

@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Client;
+use App\Form\ClientType;
 use App\Form\RegistrationType;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -24,10 +26,7 @@ class SecurityController extends AbstractController
      UserPasswordEncoderInterface $encoder)
     {
         $user = new User();
-
-        //if ($user->id)
-       
-
+    
         $form = $this->createForm(RegistrationType::class, $user);
 
         $form->handleRequest($request);

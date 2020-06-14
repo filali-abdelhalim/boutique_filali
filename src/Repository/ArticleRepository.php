@@ -54,7 +54,25 @@ class ArticleRepository extends ServiceEntityRepository
 
         return $query->execute();
     }
+
+    //  /**
+    //  * @return Articles[]
+    //  */
     
+    // public function searchArticles($name): array
+
+    // {
+    //     $qb = $this->createQueryBuilder('p')
+    //         ->where('p.nomArt LIKE :name')
+    //         ->setParameter('name', '%' . $name . '%')
+    //         ->orderBy('p.prix_initial', 'ASC');
+
+    //     $query = $qb->getQuery();
+
+
+    //     return $query->execute();
+
+    // }
 
     /*
     public function findOneBySomeField($value): ?Article

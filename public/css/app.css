@@ -1,0 +1,77 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+nav{
+    background-color: blanchedalmond;
+    width: 100%;
+}
+nav ul::after{
+    content: "";
+    display: block;
+    clear: both;
+}
+nav >ul >li >a{
+    padding: 20px 25px;
+    display: inline-block;
+    color: blue;
+}
+
+nav a{
+    display: inline-block;
+    text-decoration: none;
+}
+
+nav > ul >li{
+    display: inline-flex;
+    float: center;
+    position: relative;
+   
+}
+nav li{
+    list-style-type: none;
+}
+.sous{
+    display: none;
+}
+nav li:hover .sous{
+    display: inline-block;
+    position: absolute;
+    z-index: 1000;
+    /* padding: 0px; */
+    left: 0px;
+    top: 100%;
+}
+.sous li {
+    border-bottom: 1px solid black;
+  
+}
+.sous li a{
+    padding: 15px 30px;
+    font-size: 20px;
+    color: black;
+    width: 250px;
+}
+/* .parc :hover{
+    border-top:2px solid chartreuse;
+    background-color: chocolate;
+}
+.animaux :hover{
+    border-top:2px solid chartreuse;
+    background-color: chocolate;
+}
+.consevation :hover{
+    border-top:2px solid chartreuse;
+    background-color: chocolate;
+}
+.animation :hover{
+    border-top:2px solid chartreuse;
+    background-color: chocolate;
+}
+.infos :hover{
+    border-top:2px solid chartreuse;
+    background-color: chocolate;
+} */
+
+

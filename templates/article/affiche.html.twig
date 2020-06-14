@@ -9,31 +9,32 @@
 
 <style>
        
-    .filter { position: sticky; display: block ; top: 20px; }
+    .filter { position: sticky; display: block ; top: 20px;  }
 </style>
 
   {# <main role="main"> #}
 
-      <h1>tout les produites disponibles  ! ✅</h1>
+      <h1>tout les produites disponibles  </h1>
 
-            <div class="container">
+            <div class="container d-inline">
                 
                 <div class="row" >
                 
                  {# pour separer le filter  #}
 
-                        <div class="col-md-3 bg-light d-inline">  
+                        <div class="col-md-2 bg-light d-inline mr-2 ml-5">  
 
                             {% include 'article/filter.html.twig' with {form : form} only %} 
                         </div>
 
         {# <div class="bg-light displayList" > #}
        
+                <div class="card-body">
 
         {% for art in articles %}
-                <div class="col-md-3">
-                <p class="card-text"> {{art.NomArt}} </p>
-                    <div class="card mb-1 shadow-sm">
+                <div class="col-md-8">
+                <p class="card-text" style="font-weight: bold; font-size: 1.5rem;"> {{art.NomArt}} </p>
+                    <div class="card mb-1 shadow-sm d-block">
                 {% if art.Promo %} 
                         <p class="text card-text text-warning">En promotion </p>
                 {% endif %}
@@ -41,8 +42,9 @@
                     <img src="{{ art.Image }}" class="d-block w-50 h-50" alt="{{art.NomArt}}">
                         <div class="card-body">
                             <p class="card-text">{{ art.Description|slice(0, 50) }}...</p>
+                        
                             <div class="card-body">
-                                <p class="card-text text-primary" style="font-weight: bold; font-size: 1.5rem;">{{ art.PrixInitial | number_format(0,',',' ') }} € HT </p>
+                                <p class="card-text text-primary " style="font-weight: bold; font-size: 1.5rem;">{{ art.PrixInitial | number_format(0,',',' ') }} € HT </p>
                             
                                 <p class="card-text text-primary" style="font-weight: bold; font-size: 1.5rem;">{{ art.PrixFinal | number_format(0,',',' ')}}  € TTC </p>
 
@@ -63,7 +65,7 @@
                 </div>
                                                 
         {% endfor %}
-                      {# </div> #}
+                      </div>
                     </div>
                 </div>
 

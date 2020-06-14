@@ -43,17 +43,23 @@ class CaddyController extends AbstractController
         // dump($total) ;
         // exit();
 
-        return $this->render('caddy/index.html.twig', ['panier' => $panierData, 'total'=> $total,
+        return $this->render('caddy/panier.html.twig', ['panier' => $panierData, 'total'=> $total,
          'tva'=> $TVA, 'generale'=>$totalGenerale]);
     }
 
     /**
      * @Route("/caddy/add/{id}", name="caddy_add")
      * @return Response 
+     * @return Request
      */
-    public function add($id , SessionInterface $session) :Response
+    public function add($id , SessionInterface $session,Request $request) :Response
     {
-
+     // /caddy
+     $route =substr($request->get('redirect'),1); // pour recuperer les parametre de url pour rediger ver la meme page
+     if (empty($route) )
+     {
+       $route = "home";
+     }
       $panier = $session->get('panier',[]);
 
         if (!empty($panier[$id]))
@@ -66,8 +72,7 @@ class CaddyController extends AbstractController
         }
 
       $session ->set('panier', $panier);
-
-      return $this->redirectToRoute("caddy");
+     return $this->redirectToRoute($route);
 
         // return $this->render('caddy/index.html.twig', ['panier' => $session,]);
     }

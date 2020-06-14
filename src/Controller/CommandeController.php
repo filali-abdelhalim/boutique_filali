@@ -13,9 +13,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
+use Dompdf\Dompdf;
+use Dompdf\Options;
 class CommandeController extends AbstractController
 {
+
+  
     /**
      * @Route("/commande", name="commande_payer")
      */
@@ -75,12 +78,73 @@ class CommandeController extends AbstractController
 
         }
         // $session->set('panier',[]);   pour vide le panier apres l'achat
-        dd('sortie');
-        return $this->render('commande/index.html.twig', [
-            'controller_name' => 'CommandeController',
-        ]);
+        // dd($client,$commande,$facture);
+   $session ->set('panierData', $panierData);   
+    $session ->set('client', $client);  
+     $session ->set('commande', $commande);  
+      $session ->set('facture', $facture);  
+        $session ->set('total', $total);   
+         $session ->set('tva', $TVA);   
+          $session ->set('generale', $totalGenerale);  
+          
+          
+   $this->addFlash('generale', 'Paiement effectué');
+  
+     return $this->render('commande/facture.html.twig', [
+           'articles' => $panierData,'client'=>$client, 'commande'=>$commande,'facture'=>$facture,'total'=> $total,
+           'tva'=> $TVA, 'generale'=>$totalGenerale ]);
+
+
+        
     }
   }
+
+  /**
+     * @Route("/facture", name="facture_print")
+     */
+    public function facture(SessionInterface $session)
+
+    {
+
+   $panierData =  $session ->get('panierData');
+     $client = $session ->get('client');
+      $commande = $session ->get('commande');
+       $facture = $session ->get('facture');
+        $total = $session ->get('total');
+         $TVA = $session ->get('tva');
+         $totalGenerale =  $session ->get('generale');
+    
+   /////
+          $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+        
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+        
+        // Retrieve the HTML generated in our twig file
+        $html = $this->render('commande/facture_print.html.twig', [
+            'articles' => $panierData,'client'=>$client, 'commande'=>$commande,'facture'=>$facture,'total'=> $total,'tva'=> $TVA, 'generale'=>$totalGenerale ]);
+   //  dd($html);
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+        
+        
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+         
+
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => false
+        ]);
+         
+    
+         ////
+        }
+        
 }
 //  on a fait jointure entre commande et article
  // on a fait jointure entre commande et client 

@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
 
         <title>{% block title %}Boutique en ligne !{% endblock %}</title>
+
       
         <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
         {# <link rel="stylesheet" href="web/css/style.css" media="screen" /> #}
@@ -15,17 +16,37 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css"></link>
+
+        {# <link rel="stylesheet" href="{{ asset('assets/public/web/css/app.css') }}"> #}
         <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
 
 
         {% block stylesheets %}         {% endblock %}
     </head>
     <body>
+
+
+ 
       
         {{ include('includes/header.html.twig') }}
+
+                
     <div style="margin-top: 5rem;">
+
+             <nav class="mb-2 navbar  navbar-light  font-weight-bold " 
+                  style=" color:#f60; text-decoration:underline; line-height:20px ;
+                   justify-content: center;   background-color:  rgb(157, 245, 116); ">
+                
+               <a class="navbar-brand "  href="https://www.gouvernement.fr/info-coronavirus" target="_blank"> Infos COVID-19</a>
+           </nav>
         {% block body %}
+
+           
+        
         {% endblock %}
+    </div>
+    <div class="mt-5">
     </div>
 
         {{ include('includes/footer.html.twig') }}
@@ -36,6 +57,7 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <script src="{{ asset('assets/js/app.js') }}"></script>
+        <script src="https://kit.fontawesome.com/samplekit.js" crossorigin="anonymous"></script>
         {# <script src="web/js/main.js"></script> #}
     {% endblock %}
 

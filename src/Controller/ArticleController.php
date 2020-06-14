@@ -41,8 +41,19 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class ArticleController extends AbstractController
 {
+    
     /**
-     * @Route("/", name="home")
+     * @Route("/", name="menu")
+     * @param ArticleRepository $articleRepository
+     * @return Response 
+     */
+    public function menu()
+    {
+        return $this->render('article/menu.html.twig', [] );
+    }
+
+    /**
+     * @Route("/accueil", name="home")
      * @param ArticleRepository $articleRepository
      * @return Response 
      */

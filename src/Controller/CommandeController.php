@@ -56,8 +56,7 @@ class CommandeController extends AbstractController
             $em->persist($facture);
             $em->flush();
           
-           
-            $client = $client_repo->find($user->getId());
+            $client = $client_repo->findBy(array('user' => $user->getId()))[0];
             $commande = new Commande();
             $commande->setClient($client);
             $commande->setFacture($facture);

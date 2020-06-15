@@ -32,8 +32,8 @@
 
 </div>
      {{client.adresse}}
-      {{client.ville}}
-       {{client.CP}}
+      {{client.ville}} <br>
+       {{client.CP}} <br>
         0{{client.telephone}}
 </div>
 <div class="example-wrapper">
@@ -83,6 +83,8 @@
      </tfoot>      
 
    </table>
+    <p> Fait le : {{ commande.dateCmd |date("d/m/Y") }} </p> <br><br>
+
    <a href="{{ path('facture_print') }} "  class="btn btn-success btn-sm"> imprimer </a>
 
 

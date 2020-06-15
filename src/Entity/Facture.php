@@ -22,7 +22,7 @@ class Facture
     private $Apayer;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     private $payee;
 
@@ -43,12 +43,12 @@ class Facture
         return $this;
     }
 
-    public function getPayee(): ?int
+    public function getPayee(): ?float
     {
         return $this->payee;
     }
 
-    public function setPayee(int $payee): self
+    public function setPayee(float $payee): self
     {
         $this->payee = $payee;
 

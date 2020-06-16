@@ -7,36 +7,36 @@
 {% block body %}
 
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 400px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .example-wrapper {  margin: 1em auto; max-width: 300px; width: 95%; font: 18px/1.5 sans-serif; 
+                        background: #F5F5F5; padding: 2px 2px;position: sticky; display: block ; top: 20px;  }
 </style>
 
-<div class="example-wrapper" class="example-wrapper code">
+<div class="example-wrapper" >
 
+    <div class="col-md-2 bg-light d-inline text-center ">
 
+        <h2> connexion !</h2>
 
-    <h1> connexion !</h1>
+        <form action="{{ path('security_login') }}" method="POST" class="mr-4 ml-4">
 
-
-    <form action="{{ path('security_login') }}" method="POST">
-
-        <div class="form-group">
-            <input class="form-control" type="text" required name="_username" placeholder="Adresse email" >
-        </div>
             <div class="form-group">
-            <input class="form-control" type="password" required name="_password" placeholder="mot de passe" >
-        </div>
+                <input class="form-control" type="text" required name="_username" placeholder="Adresse email" >
+            </div>
+                <div class="form-group">
+                <input class="form-control" type="password" required name="_password" placeholder="mot de passe" >
+            </div>
 
-        <div>
+            <div>
 
-            <button class="btn btn-success my-2 my-sm-0"  type="submit"> Connecter </button>
-        </div>
+                <button class="btn btn-success my-2 my-sm-0"  type="submit"> Connecter </button>
+            </div>
 
-        <div>
-            <a class="nav-link" href="{{ path('security_registration') }}"> Creer Un Compte </a>
-        </div>
+            <div>
+                <a class="nav-link mt-8 " href="{{ path('security_registration') }}"> Creer Un Compte </a>
+            </div>
 
-    </form>
+        </form>
+    </div>
 
 </div>
 

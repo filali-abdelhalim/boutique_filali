@@ -42,6 +42,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 class ArticleController extends AbstractController
 {
     
+
     /**
      * @Route("/", name="menu")
      * @param ArticleRepository $articleRepository
@@ -49,9 +50,32 @@ class ArticleController extends AbstractController
      */
     public function menu()
     {
+    
         return $this->render('article/menu.html.twig', [] );
-    }
 
+    }
+    /**
+     * @Route("/recherche", name="recherche_article")
+     * @param ArticleRepository $articleRepository
+     * @return Response 
+     */
+    public function recherche(ArticleRepository $articleRepository ,Request $request)
+    {
+    
+        $data = new SearchData();
+
+        if ($data->q !== null)
+        {
+            $article = $articleRepository->searchArticle($data->q);
+        }
+        
+        else {
+            return $this->redirectToRoute("menu");
+        }
+        // dd($articleRepository);
+        return $this->render('article/recherche.html.twig', ['article'=>$article] );
+
+    }    
     /**
      * @Route("/accueil", name="home")
      * @param ArticleRepository $articleRepository

@@ -1,0 +1,48 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %} tout les produites !{% endblock %}
+
+
+{% block body %}
+
+<!-- resultat de recherche -->
+
+
+<div class="card-body">
+
+        {% for produit in article %}
+                <div class="col-md-8">
+                <p class="card-text" style="font-weight: bold; font-size: 1.5rem;"> {{produit.NomArt}} </p>
+                    <div class="card mb-1 shadow-sm d-block">
+                {% if produit.Promo %} 
+                        <p class="text card-text text-warning">En promotion </p>
+                {% endif %}
+
+                    <img src="{{ produit.Image }}" class="d-block w-50 h-50" alt="{{produit.NomArt}}">
+                        <div class="card-body">
+                            <p class="card-text">{{ produit.Description|slice(0, 50) }}...</p>
+                        
+                            <div class="card-body">
+                                <p class="card-text text-primary " style="font-weight: bold; font-size: 1.5rem;">{{ produit.PrixInitial | number_format(0,',',' ') }} € HT </p>
+                            
+                                <p class="card-text text-primary" style="font-weight: bold; font-size: 1.5rem;">{{ produit.PrixFinal | number_format(0,',',' ')}}  € TTC </p>
+
+                                        <a href="{{ path('article_show', {"id": produit.id}) }}" class="btn btn-sm btn-outline-secondary">Voir</a>
+                                        <a href="{{ path('caddy_add', {"id": produit.id}) }} " class="btn btn-success btn-sm"><i class="fas fa-shopping-cart mr-1"></i> Ajouter au panier </a>
+
+                                            {% if is_granted('ROLE_ADMIN') %} 
+                                        <a href="{{ path('article_edit', {"id": produit.id}) }}" class="btn btn-sm btn-outline-secondary">Editer</a>
+                                        <a href="{{ path('article_delete', {"id": produit.id}) }}" class="btn btn-sm btn-outline-secondary" onclick="return confirm('Attention ce ci va supprimer l\'article selectionnez')">Supprimer</a>
+                                            {% endif %}                                  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                                
+        {% endfor %}
+</div>
+
+<!-- resultat de recherche -->
+
+{% endblock %}

@@ -55,24 +55,24 @@ class ArticleRepository extends ServiceEntityRepository
         return $query->execute();
     }
 
-    //  /**
-    //  * @return Articles[]
-    //  */
+     /**
+     * @return Articles[]
+     */
     
-    // public function searchArticles($name): array
+    public function searchArticle($produit): array
 
-    // {
-    //     $qb = $this->createQueryBuilder('p')
-    //         ->where('p.nomArt LIKE :name')
-    //         ->setParameter('name', '%' . $name . '%')
-    //         ->orderBy('p.prix_initial', 'ASC');
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->where('a.nomArt LIKE :name')
+            ->setParameter('name', '%' . $produit . '%')
+            ->orderBy('a.prix_initial', 'ASC');
 
-    //     $query = $qb->getQuery();
+        $query = $qb->getQuery();
 
 
-    //     return $query->execute();
+        return $query->execute();
 
-    // }
+    }
 
     /*
     public function findOneBySomeField($value): ?Article

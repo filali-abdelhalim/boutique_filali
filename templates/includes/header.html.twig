@@ -11,6 +11,10 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{{ path('home') }}">Accueil <span class="sr-only">(current)</span></a>
             </li>
+            
+            {# <li class="nav-item active">
+                <a class="nav-link" href="{{ path('includes/footer.html.twig') }}">Contact <span class="sr-only">(current)</span></a>
+            </li> #}
             {% if is_granted('ROLE_ADMIN') %} 
 
             <li class="nav-item active">
@@ -23,9 +27,32 @@
                 <a class="nav-link" href="{{ path('ajouter_categorie') }}">Ajouter une categorie</a>
             </li>
             {% endif %}
+
+{# <div class="pull-right col-lg-4 col-md-4 col-sm-2 col-xs-3" id="cmcwebpartbasketmini">
+	<div id="ttMiniCaddy"><div id="minicaddie" name="minicaddie">	<a class="hidden-sm hidden-xs" href="/sales/slscommercebasket.aspx">
+		<div class="productNumber">
+			<i class="icon-basket"></i>
+		<span>0</span></div>
+		<div class="titlePrice hidden-sm hidden-xs">
+			<span class="txtmain">Mon panier</span>
+			<span class="greentext">0,00€<sup>HT</sup></span>
+		</div>
+	</a>
+	<a class="hidden-lg hidden-md col-sm-24 col-xs-24" href="/sales/slscommercebasket.aspx">
+		<div class="productNumber">
+			<i class="icon-basket"></i>
+			<span>0</span>
+		</div>
+	</a>
+</div></div>
+</div> #}
+
             <li class="nav-item active">
-                <a class="nav-link " href="{{ path('caddy') }}"> <i class="fas fa-shopping-cart "> </i> Mon Panier</a>
+    
+                <a class="nav-link " href="{{ path('caddy') }}"> <i class="fas fa-shopping-cart"> </i> Mon Panier </a>
+
             </li>
+
             
              {% if app.user %}
                 

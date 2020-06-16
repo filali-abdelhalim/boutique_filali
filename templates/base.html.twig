@@ -26,13 +26,18 @@
     </head>
     <body>
 
-
+        <style>
+            .recherche { max-width: 400px; width: 95%; font: 18px/1.5 sans-serif;
+                             }
+        </style>
  
       
         {{ include('includes/header.html.twig') }}
 
                 
-    <div style="margin-top: 5rem;">
+<div style="margin-top: 5rem;">
+
+    <!-- barre infos -->
 
              <nav class="mb-2 navbar  navbar-light  font-weight-bold " 
                   style=" color:#f60; text-decoration:underline; line-height:20px ;
@@ -40,12 +45,46 @@
                 
                <a class="navbar-brand "  href="https://www.gouvernement.fr/info-coronavirus" target="_blank"> Infos COVID-19</a>
            </nav>
-        {% block body %}
+    <!-- barre infos -->
 
-           
-        
+
+<!-- barre de recherche -->
+
+ <div class="container d-flex">
+        <div class="col-lg-4  col-md-4 col-sm-6 col-xs-12 " id="cmcwebuserlogohome">
+            
+
+                <a title=" Vente de materiel informatique en ligne " class="WPUserLogo" id="lkIndex" 
+                    onclick="ga('send', 'event', 'header', 'click-home', 'Logo informatique pour tous on header');" href="/">
+                    <img src="{{asset ('img/logo.jpg')}}" title=" Vente de materiel informatique en ligne"
+                        alt="informatqiue pour tous" >
+                </a>
+
+                <div style="display:none;">test</div>
+        </div>
+
+        <div class="recherche" >
+
+            <form action="{{ path('recherche_article') }}" method="POST" class="d-flex mr-4 ml-4">
+
+                    <div class="form-group">
+                        <input class="form-control " type="text" required name="_q" placeholder="search" >
+                    </div>
+                    
+                    <div>
+
+                        <button class="btn btn-primary my-2 my-sm-0 ml-2"  type="submit"> search </button>
+                    </div>
+            </form>
+
+        </div>
+</div>
+<!-- barre de recherche -->
+
+        {% block body %}
+            
         {% endblock %}
-    </div>
+</div>
     <div class="mt-5">
     </div>
 
@@ -61,8 +100,6 @@
         {# <script src="web/js/main.js"></script> #}
     {% endblock %}
 
-
-
-      
+     
     </body>
 </html>

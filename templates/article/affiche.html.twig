@@ -29,12 +29,12 @@
 
         {# <div class="bg-light displayList" > #}
        
-                <div class="card-body">
+                <div class="card-body ">
 
         {% for art in articles %}
-                <div class="col-md-8">
+                <div class="col-md-8 ">
                 <p class="card-text" style="font-weight: bold; font-size: 1.5rem;"> {{art.NomArt}} </p>
-                    <div class="card mb-1 shadow-sm d-block">
+                    <div class="card mb-1 shadow-sm d-block w-50">
                 {% if art.Promo %} 
                         <p class="text card-text text-warning">En promotion </p>
                 {% endif %}

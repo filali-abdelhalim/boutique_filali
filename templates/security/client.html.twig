@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} tout les produites !{% endblock %}
+
+
+{% block body %}
+
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 200; width: 95%; font: 18px/1.5 sans-serif;
+                       background: #F5F5F5; }
+</style>        
+
+    <table class="table">
+
+            <thead >
+
+                  <tr>
+                      <th> nom </th>  
+                      <th> prenom </th>                
+                      <th> date de naissance </th>                
+                      <th> adresse </th>                
+                      <th> ville </th>                
+                      <th> code postale </th>                
+                      <th> telephone </th>                
+              
+                  </tr>
+          </thead>
+
+          <tbody>
+
+          {% for cli in client %}
+      
+                  <tr>
+                      <td> {{ cli.getNomCli() }}    </td>
+                      <td> {{ cli.getPrenomCli() }}    </td>
+                      {# <td> {{ cli.getDateDeNaissance() }}    </td> #}
+                      <td> {{ cli.getAdresse() }}    </td>
+                      <td> {{ cli.getVille() }}    </td>
+                      <td> {{ cli.getCP() }}    </td>
+                      <td> {{ cli.getTelephone() }}    </td>
+
+                      <td> 
+                      <a href="{{ path('client_delete',{"id": cli.id}) }}" > <i class="fas fa-trash"></i></a>
+                      </td>
+                      
+                  </tr>
+          {% endfor %}
+
+          </tbody>
+      
+    </table>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Categorie!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 400px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+ <div class="example-wrapper">
+
+    <h2> Ajouter Category  ✅</h2>
+
+
+  {{ form_start(form) }}
+
+    {{ form_widget(form) }} 
+
+    {{ form_end(form) }}
+
+      <table class="table">
+
+            <thead>
+
+                  <tr>
+                      <th> name categorie </th>                
+                  </tr>
+          </thead>
+
+          <tbody>
+
+          {% for cat in categorie %}
+      
+                  <tr>
+                      <td> {{ cat.name }}    </td>
+                      <td> 
+                      <a href="{{ path('supprimer_categorie',{"id": cat.id}) }}" > <i class="fas fa-trash"></i></a>
+                      </td>
+                      
+                  </tr>
+          {% endfor %}
+
+          </tbody>
+      
+      </table>
+
+</div>
+ 
+
+{% endblock %}

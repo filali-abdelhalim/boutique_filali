@@ -89,16 +89,14 @@ class CommandeController extends AbstractController
           
    $this->addFlash('generale', 'Paiement effectué');
   
-     return $this->render('commande/facture.html.twig', [
-           'articles' => $panierData,'client'=>$client, 'commande'=>$commande,'facture'=>$facture,'total'=> $total,
+     return $this->render('commande/facture.html.twig',
+          ['articles' => $panierData,'client'=>$client, 'commande'=>$commande,'facture'=>$facture,'total'=> $total,
            'tva'=> $TVA, 'generale'=>$totalGenerale ]);
-
-
-        
+ 
     }
   }
 
-  /**
+    /**
      * @Route("/facture", name="facture_print")
      */
     public function facture(SessionInterface $session)

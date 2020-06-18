@@ -12,9 +12,7 @@
 
 <div class="example-wrapper">
 
-    <h1> ajouter un article  ✅</h1>
-
-
+    <h2> Ajouter un Article  ✅</h2>
 
   {{ form_start(form) }}
 
@@ -23,4 +21,42 @@
     {{ form_end(form) }}
 
 </div>
+
+<table class="table">
+
+            <thead >
+
+                  <tr>
+                      <th> nom </th>  
+                      <th> description </th>                
+                      <th> image </th>                
+                      <th> prix initial </th>                
+                      <th> prix finale </th>                
+                      <th> promo </th>                
+                  </tr>
+          </thead>
+
+          <tbody>
+
+        {% for art in articles %}
+      
+                  <tr>
+                      <td> {{ art.NomArt }}    </td>
+                      <td> {{ art.Description }}   </td>
+                      <td>  <img src="{{ art.Image }}" class="d-block w-50 h-50" > </td>
+                      <td> {{ art.PrixInitial }}    </td>
+                      <td> {{ art.PrixFinal }}    </td>
+                      <td> {{ art.Promo }}    </td>
+
+                      <td> 
+                      <a href="{{ path('article_delete',{"id": art.id}) }}" > <i class="fas fa-trash"></i></a>
+                      </td>
+                      
+                  </tr>
+          {% endfor %}
+
+          </tbody>
+      
+    </table>
+
 {% endblock %}

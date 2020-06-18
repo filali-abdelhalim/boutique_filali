@@ -81,6 +81,28 @@
 </div>
 <!-- barre de recherche -->
 
+<!-- barre  admin -->
+
+{% if is_granted('ROLE_ADMIN') %} 
+
+    <ul class="nav flex-column">
+    <li class="nav-item">
+            <a class="nav-link" href="{{ path('ajouter_article') }}"> Article</a>
+    </li>
+    <li class="nav-item">
+            <a class="nav-link" href="{{ path('ajouter_marque') }}"> Marque</a>
+    </li>
+    <li class="nav-item">
+            <a class="nav-link" href="{{ path('ajouter_categorie') }}"> Categorie</a>
+    </li>
+     <li class="nav-item">
+            <a class="nav-link" href="{{ path('client') }}"> Client</a>
+    </li>
+    </ul>
+{% endif %}
+
+<!-- barre  admin -->
+
         {% block body %}
             
         {% endblock %}

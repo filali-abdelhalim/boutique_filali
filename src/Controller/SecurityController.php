@@ -7,9 +7,11 @@ use App\Entity\Client;
 use App\Form\ClientType;
 use App\Form\RegistrationType;
 
-use Symfony\Component\HttpFoundation\Request;
+use App\Repository\UserRepository;
 
 // use Doctrine\Common\Persistence\ObjectManager;
+use App\Repository\ClientRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,8 +47,7 @@ class SecurityController extends AbstractController
         }
 
 
-        return $this->render('security/registration.html.twig', [
-            'form' => $form->createView(), ]);
+        return $this->render('security/registration.html.twig', ['form' => $form->createView() ]);
     }
     /**
      * @Route("/connexion", name="security_login")
@@ -62,4 +63,33 @@ class SecurityController extends AbstractController
     {
       
     }
+    /**
+     * @Route("/client", name="client")
+     */
+    public function client(ClientRepository $clientRepository)
+    {
+       return $this->render('security/client.html.twig', [ 'client'=>$clientRepository->findAll() ]);
+    }
+
+     /**
+     * @Route("admin/client/{id}/delete", name="client_delete")
+     * @param UserRepository $UserRepository
+     * @return RedirectResponse
+     */
+    public function delete($id, Request $request): RedirectResponse
+    {
+
+        $repository = $this->getDoctrine()->getRepository(user::class) ;
+        $user = $repository->find($id);     
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($user);
+        $em->flush();
+
+         return $this->redirectToRoute("client");
+    }
+
+
+
+
 }

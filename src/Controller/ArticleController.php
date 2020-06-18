@@ -111,7 +111,7 @@ class ArticleController extends AbstractController
     /**
      * @Route("/admin/article", name="ajouter_article")
      */
-    public function index(Request $request): Response
+    public function index(Request $request,ArticleRepository $articleRepository): Response
     {
         
 
@@ -170,10 +170,12 @@ class ArticleController extends AbstractController
             $em->persist($article);
             $em->flush();
 
-            return $this->redirectToRoute("home");
+
+            // return $this->redirectToRoute("home");
            
         }
-        return $this->render('article/ajouter.html.twig',["form" => $form->createView()]);
+        return $this->render('article/ajouter.html.twig',
+        ["form" => $form->createView(),'articles' => $articleRepository->findAll()]);
 
         
     }
@@ -210,7 +212,7 @@ class ArticleController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
-            return $this->redirectToRoute("home");
+            return $this->redirectToRoute("ajouter_article");
         }
         return $this->render("article/edit.html.twig", ["form" => $form->createView()]);
     }

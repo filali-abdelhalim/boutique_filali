@@ -55,7 +55,7 @@ class User implements UserInterface
     private $roles = [];
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Client", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Client", mappedBy="user", cascade={"persist", "remove"},orphanRemoval=true)
      */
     private $client;
 

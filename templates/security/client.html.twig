@@ -27,20 +27,19 @@
           </thead>
 
           <tbody>
-
           {% for cli in client %}
       
                   <tr>
                       <td> {{ cli.getNomCli() }}    </td>
                       <td> {{ cli.getPrenomCli() }}    </td>
-                      {# <td> {{ cli.getDateDeNaissance() }}    </td> #}
+                      <td> {{ cli.getDateDeNaissance()|date('d/m/Y') }}    </td>
                       <td> {{ cli.getAdresse() }}    </td>
                       <td> {{ cli.getVille() }}    </td>
                       <td> {{ cli.getCP() }}    </td>
                       <td> {{ cli.getTelephone() }}    </td>
 
                       <td> 
-                      <a href="{{ path('client_delete',{"id": cli.id}) }}" > <i class="fas fa-trash"></i></a>
+                      <a href="{{ path('client_delete',{"id": cli.user.id}) }}" > <i class="fas fa-trash"></i></a>
                       </td>
                       
                   </tr>

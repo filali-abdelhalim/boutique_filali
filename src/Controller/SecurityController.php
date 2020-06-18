@@ -7,13 +7,13 @@ use App\Entity\Client;
 use App\Form\ClientType;
 use App\Form\RegistrationType;
 
-use App\Repository\UserRepository;
+use App\Repository\ClientRepository;
 
 // use Doctrine\Common\Persistence\ObjectManager;
-use App\Repository\ClientRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -73,20 +73,21 @@ class SecurityController extends AbstractController
 
      /**
      * @Route("admin/client/{id}/delete", name="client_delete")
-     * @param UserRepository $UserRepository
+     * @param UserRepository $userRepository
      * @return RedirectResponse
      */
     public function delete($id, Request $request): RedirectResponse
     {
 
         $repository = $this->getDoctrine()->getRepository(user::class) ;
-        $user = $repository->find($id);     
-
+        $user = $repository->findOneBy(array('id'=>$id));     
         $em = $this->getDoctrine()->getManager();
         $em->remove($user);
         $em->flush();
 
-         return $this->redirectToRoute("client");
+        echo'supprimer';
+
+         return new RedirectResponse ($this->redirectToRoute("client"));
     }
 
 

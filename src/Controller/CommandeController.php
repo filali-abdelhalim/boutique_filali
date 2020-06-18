@@ -103,11 +103,11 @@ class CommandeController extends AbstractController
 
     {
 
-   $panierData =  $session ->get('panierData');
-     $client = $session ->get('client');
-      $commande = $session ->get('commande');
-       $facture = $session ->get('facture');
-        $total = $session ->get('total');
+         $panierData =  $session ->get('panierData');
+         $client = $session ->get('client');
+         $commande = $session ->get('commande');
+         $facture = $session ->get('facture');
+         $total = $session ->get('total');
          $TVA = $session ->get('tva');
          $totalGenerale =  $session ->get('generale');
     

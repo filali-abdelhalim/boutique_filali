@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
@@ -50,13 +52,14 @@ class Client
     private $CP;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
+     * @Assert\Regex("/^(0|\+33)[1-9]([-. ]?[0-9]{2}){4}$/")
      */
     private $telephone;
 
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Commande", mappedBy="client")
+     * @ORM\OneToMany(targetEntity="App\Entity\Commande", mappedBy="client",orphanRemoval=true)
      */
     private $commandes;
 
@@ -150,18 +153,7 @@ class Client
         return $this;
     }
 
-    public function getTelephone(): ?int
-    {
-        return $this->telephone;
-    }
-
-    public function setTelephone(int $telephone): self
-    {
-        $this->telephone = $telephone;
-
-        return $this;
-    }
-  
+    
 
     /**
      * @return Collection|Commande[]
@@ -207,4 +199,16 @@ class Client
     }
 
 
+    public function getTelephone()
+    {
+        return $this->telephone;
+    }
+
+    
+    public function setTelephone($telephone)
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
 }

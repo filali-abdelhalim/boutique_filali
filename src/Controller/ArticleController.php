@@ -233,7 +233,7 @@ class ArticleController extends AbstractController
         $em->remove($article);
         $em->flush();
 
-         return $this->redirectToRoute("home");
+         return $this->redirectToRoute("ajouter_article");
     }
 
    

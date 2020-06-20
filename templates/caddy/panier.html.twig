@@ -33,7 +33,10 @@
      {% for Art in panier %}
             <tr>
             {# <img src="{{ Art.article.Image }}" class="d-block w-50 h-50"> #}
-                <td> {{ Art.article.NomArt}}    </td>
+                <td> {{ Art.article.NomArt}} 
+                     <img src="{{asset('images/articles/'~Art.article.imageName) }}" 
+                         style="width: 30%;height: auto" alt="...">
+                </td>
                 <td> {{ Art.article.PrixInitial }} </td>
                 <td> {{ Art.quantité}} </td>
                 <td> {{ Art.article.PrixInitial  * Art.quantité  }} </td>

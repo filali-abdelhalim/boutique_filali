@@ -18,34 +18,37 @@
     {{ form_widget(form) }} 
 
     {{ form_end(form) }}
-
-      <table class="table">
-
-            <thead>
-
-                  <tr>
-                      <th> name categorie </th>                
-                  </tr>
-          </thead>
-
-          <tbody>
-
-          {% for cat in categorie %}
       
-                  <tr>
-                      <td> {{ cat.name }}    </td>
-                      <td> 
-                      <a href="{{ path('supprimer_categorie',{"id": cat.id}) }}" > <i class="fas fa-trash"></i></a>
-                      </td>
-                      
-                  </tr>
-          {% endfor %}
-
-          </tbody>
-      
-      </table>
-
 </div>
+
+    <table class="table" style="max-width: 400px">
+
+                <thead class="bg-light">
+
+                    <tr>
+                        <th> name categorie </th> 
+                        <th> supprission categorie </th>               
+                    </tr>
+            </thead>
+
+            <tbody>
+
+            {% for cat in categorie %}
+        
+                    <tr>
+                        <td> {{ cat.name }}    </td>
+                        <td> 
+                        <a href="{{ path('supprimer_categorie',{"id": cat.id}) }}" 
+                        onclick="return confirm('Attention ce ci va supprimer la categorie selectionnez')" > <i class="fas fa-trash"></i></a>
+                        </td>
+                        
+                    </tr>
+            {% endfor %}
+
+            </tbody>
+        
+    </table>
+
  
 
 {% endblock %}

@@ -11,7 +11,8 @@
              {% if article.Promo %} 
                         <p class="text card-text text-warning">En promotion </p>
              {% endif %}
-                    <img src="{{ article.Image }}" class="d-block w-50 h-50" alt="{{article.NomArt}}">
+                    {# <img src="{{ article.Image }}" class="d-block w-50 h-50" alt="{{article.NomArt}}"> #}
+                         <img src="{{asset('images/articles/'~article.imageName) }}" style="width: 100%;height: auto" alt="...">
                 <div class="card-body">
                     <p class="card-text">{{ article.Description|slice(0, 50) }}...</p>
                     <div class="card-body">

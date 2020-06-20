@@ -3,40 +3,41 @@
 namespace App\Controller;
 
 
-use App\Entity\Article;
-use App\Entity\Categorie;
+use Twig\Environment;
 use App\Entity\Marque;
+use App\Entity\Article;
 use App\Data\SearchData;
 
 
-use App\Form\ArticleType;
-use App\Form\CategorieType;
 use App\Form\MarqueType;
 use App\Form\SearchForm;
+use App\Entity\Categorie;
+use App\Form\ArticleType;
 
 
+use App\Form\CategorieType;
 use App\Repository\ArticleRepository;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\CallbackTransformer;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType; 
-use Symfony\Component\Form\Extension\Core\Type\TextType; 
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\MoneyType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 // use Doctrine\ORM\EntityManagerInterface;
-use Twig\Environment;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType; 
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType; 
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 // use Doctrine\ORM\EntityManagerInterface;
 
 class ArticleController extends AbstractController
@@ -116,49 +117,8 @@ class ArticleController extends AbstractController
         
 
         $article = new Article();
-        $form = $this->createFormBuilder($article)
-                
-        
-                ->add('nom_art', TextType::class,
-                ["attr" => ["class" => "form-control"]])
-                
-                ->add('prix_initial', MoneyType::class,
-                ["attr" => ["class" => "form-control"]])
-
-                ->add('promo', CheckboxType::class, 
-                ['label' => 'En promotion',
-                 'required' => false,])
-
-                ->add('prix_final', MoneyType::class,
-                ["attr" => ["class" => "form-control"]])
-
-                ->add('description', TextareaType::class,
-                ["attr" => ["class" => "form-control"]])
-
-                ->add('image', TextType::class,
-                ["attr" => ["class" => "form-control"]])
-
-            
-                ->add('categorie', EntityType::class,
-                ['class' => Categorie::class,
-                        
-                'choice_label' => function($categorie, $key, $value) { 
-                /** @var Categorie $categorie */ return ($categorie->getName());
-                },
-                ])
-       
-
-                ->add('marque', EntityType::class,  // deuxieme methode pour type choice label 
-                ['class' => Marque::class,
-                'choice_label' => function ($marque) {
-                    return $marque->getLibelleMarque();
-                },
-                ])
-
-            
-                ->add('Ajouter', SubmitType::class, ['label' => 'Ajouter'])   
-                ->getForm();
-
+      
+       $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) 

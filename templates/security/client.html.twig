@@ -12,7 +12,7 @@
 
     <table class="table">
 
-            <thead >
+            <thead class="bg-light" >
 
                   <tr>
                       <th> nom </th>  
@@ -21,8 +21,8 @@
                       <th> adresse </th>                
                       <th> ville </th>                
                       <th> code postale </th>                
-                      <th> telephone </th>                
-              
+                      <th> telephone </th>
+                      <th> supprission </th> 
                   </tr>
           </thead>
 
@@ -39,8 +39,10 @@
                       <td> {{ cli.getTelephone() }}    </td>
 
                       <td> 
-                      <a href="{{ path('client_delete',{"id": cli.user.id}) }}" > <i class="fas fa-trash"></i></a>
+                      <a href="{{ path('client_delete',{"id": cli.user.id}) }}" 
+                      onclick="return confirm('Attention ce ci va supprimer le client selectionnez')" > <i class="fas fa-trash"></i></a>
                       </td>
+                      
                       
                   </tr>
           {% endfor %}

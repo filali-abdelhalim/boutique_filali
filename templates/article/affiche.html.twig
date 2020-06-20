@@ -32,7 +32,8 @@
                 <div class="card-body " >
 
         {% for art in articles %}
-                <div class="col-md-8 ">
+        <div  class="col-4 d-inline">
+
                 <p class="card-text" style="font-weight: bold; font-size: 1.5rem;"> {{art.NomArt}} </p>
                     <div class="card mb-1 shadow-sm d-block ">
                 {% if art.Promo %} 
@@ -65,10 +66,13 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                                                
+               
+                  </div>                              
         {% endfor %}
                       </div>
+                         <div class="pagination">
+        {{ knp_pagination_render(articles) }}
+    </div>
                     </div>
                 </div>
             </div>

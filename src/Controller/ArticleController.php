@@ -38,6 +38,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Knp\Component\Pager\PaginatorInterface;
 // use Doctrine\ORM\EntityManagerInterface;
 
 class ArticleController extends AbstractController
@@ -82,9 +83,10 @@ class ArticleController extends AbstractController
      * @param ArticleRepository $articleRepository
      * @return Response 
      */
-    public function home(ArticleRepository $articleRepository ,Request $request)
+    public function home(ArticleRepository $articleRepository ,PaginatorInterface $paginator,Request $request)
     {
 
+        // Ici pagination 
         $data = new SearchData();
         // $data->page = $request->get('page', 1);
         $form = $this->createForm(SearchForm::class, $data);
@@ -94,14 +96,18 @@ class ArticleController extends AbstractController
         $marques = isset($_GET['marque']) ? $_GET['marque'] : [];
 
        
-        
+        $articles = $paginator->paginate($articleRepository->findSearchArticles_pagination($data->q, $data->min, $data->max, $categories,$marques, $data->promo),
+        $request->query->getInt('page', 1), /*page number*/
+        10 /*limit per page*/
+        );
+        /*
         if ($data->q !== null || $data->min !== null || $data->max !== null || $categories !== [] || $marques !== [] || $data->promo !== false ) {
             $articles = $articleRepository->findSearchArticles($data->q, $data->min, $data->max, $categories,$marques, $data->promo);
         } else {
             $articles = $articleRepository->findAll();
         }
 
-                   
+              */     
         return $this->render('article/affiche.html.twig', [ 'articles' => $articles,
         'form'=>$form->createView(), ] );
     }

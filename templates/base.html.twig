@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css"></link>
 
         {# <link rel="stylesheet" href="{{ asset('assets/public/web/css/app.css') }}"> #}
-        <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}" >
 
 
         {% block stylesheets %}         {% endblock %}
@@ -85,7 +85,8 @@
 
 {% if is_granted('ROLE_ADMIN') %} 
 
-    <ul class="nav flex-column">
+<ul class="nav justify-content-center">
+
     <li class="nav-item">
             <a class="nav-link" href="{{ path('ajouter_article') }}"> Article</a>
     </li>
@@ -98,7 +99,12 @@
      <li class="nav-item">
             <a class="nav-link" href="{{ path('client') }}"> Client</a>
     </li>
-    </ul>
+     <li class="nav-item">
+            <a class="nav-link" href="{{ path('recuper_commande') }}"> commande</a>
+    </li>
+    
+</ul>
+
 {% endif %}
 
 <!-- barre  admin -->

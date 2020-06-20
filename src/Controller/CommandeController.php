@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Entity\User;
 use App\Entity\Client;
 use App\Entity\Article;
@@ -9,12 +11,12 @@ use App\Entity\Facture;
 use App\Entity\Commande;
 use App\Repository\ClientRepository;
 use App\Repository\ArticleRepository;
+use App\Repository\CommandeRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Dompdf\Dompdf;
-use Dompdf\Options;
+
 class CommandeController extends AbstractController
 {
 
@@ -141,6 +143,15 @@ class CommandeController extends AbstractController
     
          ////
         }
+
+    /**
+     * @Route("/admin/commande", name="recuper_commande")
+     */
+    public function commande(CommandeRepository $commandeRepository)
+    {
+       return $this->render('commande/commande.html.twig', [ 'commande'=>$commandeRepository->findAll() ]);
+    }
+
         
 }
 //  on a fait jointure entre commande et article

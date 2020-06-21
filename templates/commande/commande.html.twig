@@ -8,12 +8,11 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1> table de commande </h1>
+    <h2> table de commande </h2>
 
     <table class="table">
 
-      <thead>
+      <thead class="bg-light">
 
             <tr>
                  <th> N° de commande </th>
@@ -21,6 +20,8 @@
                  <th> N° de client  </th>
                  <th> Date de commande </th>
                  <th> livree </th>
+                 <th> imprission </th>
+                 <th> supprission </th>
              </tr>
      </thead>
 
@@ -33,19 +34,19 @@
                 <td> {{ com.client.id }} </td>
                 <td> {{ com.getDateCmd()|date('d/m/Y') }} </td>
                 <td> {{ com.getLivree() }} </td>
+                <td>     <a href="{{ path('facture_print',{"id":com.facture.id}) }}  " target="_blank">
+                 <i class="fas fa-file-pdf"> </i> imprimer </a>
+
+                </td>
+                {# <td> <a href="{{ path('commande_delete',{"id": com.getId()}) }} " >
+                <i class="fas fa-trash-alt"></i> supprission </a> </td>
+ #}
 
             </tr>
     {% endfor %}
 
     </tbody>
-   
-       
-
+  
    </table>
-   {# <a href="{{ path('facture_print') }}  " target="_blank" class="btn btn-success btn-sm target_blank"> imprimer </a>
     
-   <a href="{{ path('menu') }} " class="btn btn-primary btn-sm  "></i> Annuler </a>
- #}
-
-
 {% endblock %}

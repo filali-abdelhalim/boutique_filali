@@ -11,8 +11,11 @@ use App\Entity\Facture;
 use App\Entity\Commande;
 use App\Repository\ClientRepository;
 use App\Repository\ArticleRepository;
+use App\Repository\FactureRepository;
 use App\Repository\CommandeRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -68,25 +71,27 @@ class CommandeController extends AbstractController
             $em->persist($commande);
            
             $em->flush();
+            $qte = [];
+            $infos = [];
+            $infos['montants']['total'] = $total;
+            $infos['montants']['tva'] = $TVA;
+            $infos['montants']['general'] = $totalGenerale;
   foreach($panier as $id=> $quantité)
         {
           $article=  $articleRepository->find($id);
           $article->setCommande($commande);
           $em->persist($article);
             $em->flush();
+            $infos['quantite'][$id]  =$quantité;
+            $facture->setInfos($infos);
+             $em->persist($facture);
+            $em->flush();
 
             // var_dump($article);
 
         }
-        // $session->set('panier',[]);   pour vide le panier apres l'achat
-        // dd($client,$commande,$facture);
-   $session ->set('panierData', $panierData);   
-    $session ->set('client', $client);  
-     $session ->set('commande', $commande);  
-      $session ->set('facture', $facture);  
-        $session ->set('total', $total);   
-         $session ->set('tva', $TVA);   
-          $session ->set('generale', $totalGenerale);  
+        $session->set('panier',[]);  // pour vide le panier apres l'achat
+
           
           
    $this->addFlash('generale', 'Paiement effectué');
@@ -98,22 +103,39 @@ class CommandeController extends AbstractController
     }
   }
 
+ 
     /**
-     * @Route("/facture", name="facture_print")
+     * @Route("/liste_commande", name="recuper_commande")
      */
-    public function facture(SessionInterface $session)
-
+    public function commande(ArticleRepository $article_repo, CommandeRepository $commandeRepository,FactureRepository $FactureRepository,ClientRepository $client_repo)
     {
 
-         $panierData =  $session ->get('panierData');
-         $client = $session ->get('client');
-         $commande = $session ->get('commande');
-         $facture = $session ->get('facture');
-         $total = $session ->get('total');
-         $TVA = $session ->get('tva');
-         $totalGenerale =  $session ->get('generale');
     
-   /////
+       return $this->render('commande/commande.html.twig', [ 'commande'=>$commandeRepository->findAll() ]);
+    }
+
+    
+    /**
+     * @Route("/facture/{id}}", name="facture_print")
+     */
+    public function facturePDF($id,ArticleRepository $article_repo, CommandeRepository $commandeRepository,FactureRepository $FactureRepository,ClientRepository $client_repo)
+
+    {
+     $client = $this->getUser()->getClient();
+      $commande = $commandeRepository->findOneByFacture($id);
+   
+      $facture= $FactureRepository->findOneById($commande->getFacture()->getId());
+     foreach($facture->getInfos()['quantite'] as $art_id =>$qtt)
+    {
+   
+      $panierData[] =  ['article' => $article_repo->find($art_id), 'quantité' => $qtt ];
+      
+    } 
+ 
+           $total = $facture->getInfos()['montants']['total'];
+         $TVA = $facture->getInfos()['montants']['tva'];
+         $totalGenerale =  $facture->getInfos()['montants']['general'];
+
           $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
         
@@ -142,14 +164,26 @@ class CommandeController extends AbstractController
          
     
          ////
-        }
+        
+      }
 
     /**
-     * @Route("/admin/commande", name="recuper_commande")
+     * @Route("admin/commande/{id}/delete", name="commande_delete")
+     * @param CommandeRepository $commandeRepository
+     * @return RedirectResponse
      */
-    public function commande(CommandeRepository $commandeRepository)
+    public function delete($id, Request $request): RedirectResponse
     {
-       return $this->render('commande/commande.html.twig', [ 'commande'=>$commandeRepository->findAll() ]);
+
+        $repository = $this->getDoctrine()->getRepository(commande::class) ;
+        $commande = $repository->findOneBy(array('id'=>$id));     
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($commande);
+        $em->flush();
+
+        // echo'supprimer';
+
+         return new RedirectResponse ($this->redirectToRoute("recuper_commande"));
     }
 
         

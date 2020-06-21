@@ -10,11 +10,14 @@
                        background: #F5F5F5; }
 </style>        
 
+
+ <h2> table de client  </h2>
     <table class="table">
 
             <thead class="bg-light" >
 
                   <tr>
+                      <th> N° de client </th>  
                       <th> nom </th>  
                       <th> prenom </th>                
                       <th> date de naissance </th>                
@@ -30,6 +33,7 @@
           {% for cli in client %}
       
                   <tr>
+                      <td> {{ cli.getId() }}    </td>
                       <td> {{ cli.getNomCli() }}    </td>
                       <td> {{ cli.getPrenomCli() }}    </td>
                       <td> {{ cli.getDateDeNaissance()|date('d/m/Y') }}    </td>

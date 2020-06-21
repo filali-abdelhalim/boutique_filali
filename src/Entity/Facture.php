@@ -26,6 +26,11 @@ class Facture
      */
     private $payee;
 
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $infos = [];
+
     public function getId(): ?int
     {
         return $this->id;
@@ -51,6 +56,18 @@ class Facture
     public function setPayee(float $payee): self
     {
         $this->payee = $payee;
+
+        return $this;
+    }
+
+    public function getInfos(): ?array
+    {
+        return $this->infos;
+    }
+
+    public function setInfos(array $infos): self
+    {
+        $this->infos = $infos;
 
         return $this;
     }

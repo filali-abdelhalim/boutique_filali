@@ -85,7 +85,7 @@ class SecurityController extends AbstractController
         $em->remove($user);
         $em->flush();
 
-        echo'supprimer';
+        // echo'supprimer';
 
          return new RedirectResponse ($this->redirectToRoute("client"));
     }

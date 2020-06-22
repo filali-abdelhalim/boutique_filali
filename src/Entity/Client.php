@@ -104,7 +104,7 @@ class Client
         return $this;
     }
 
-    public function getDateDeNaissance(): ?\DateTimeInterface
+    public function getDateDeNaissance(): ?\DateTimeInterfaces
     {
         return $this->date_de_naissance;
     }

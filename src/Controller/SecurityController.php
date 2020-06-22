@@ -11,6 +11,7 @@ use App\Repository\ClientRepository;
 
 // use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -63,12 +64,31 @@ class SecurityController extends AbstractController
     {
       
     }
+
+    // pour recupere toute les clients 
     /**
      * @Route("/client", name="client")
      */
     public function client(ClientRepository $clientRepository)
     {
        return $this->render('security/client.html.twig', [ 'client'=>$clientRepository->findAll() ]);
+    }
+
+
+    // pour recupere information client 
+    /**
+     * @Route("/{id}/infos", name="compte_infos")
+     * @param UserRepository $userRepository
+     * @return Response
+     */
+    public function client_infos($id, Request $request): Response
+    {
+      
+        $repository = $this->getDoctrine()->getRepository(user::class) ;
+        $compte = $repository->find($id); 
+
+        // dd($compte);
+       return $this->render('security/compte.html.twig', [ 'compte'=>$compte ]);
     }
 
      /**

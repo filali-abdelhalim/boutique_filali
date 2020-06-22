@@ -62,6 +62,7 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
 
+                        <a class="dropdown-item"  href="{{ path('compte_infos',{"id": app.user.getId()}) }}"> <i class="fas fa-user"> </i> infos compte</a>
                         <a class="dropdown-item"  href="{{ path('security_registration') }}"> <i class="fas fa-user-plus "> </i> ajouter un compte</a>
                         <a class="dropdown-item" href="{{ path('security_logout') }}"> <i class="fas fa-lock-open "> </i> Se déconneter </a> 
                     </div>

@@ -107,7 +107,7 @@ class CommandeController extends AbstractController
     /**
      * @Route("/liste_commande", name="recuper_commande")
      */
-    public function commande(ArticleRepository $article_repo, CommandeRepository $commandeRepository,FactureRepository $FactureRepository,ClientRepository $client_repo)
+    public function commande(CommandeRepository $commandeRepository)
     {
 
     
@@ -116,7 +116,7 @@ class CommandeController extends AbstractController
 
     
     /**
-     * @Route("/facture/{id}}", name="facture_print")
+     * @Route("/facture/{id}", name="facture_print")
      */
     public function facturePDF($id,ArticleRepository $article_repo, CommandeRepository $commandeRepository,FactureRepository $FactureRepository,ClientRepository $client_repo)
 

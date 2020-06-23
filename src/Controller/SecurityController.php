@@ -94,20 +94,23 @@ class SecurityController extends AbstractController
      /**
      * @Route("admin/client/{id}/delete", name="client_delete")
      * @param UserRepository $userRepository
-     * @return RedirectResponse
      */
-    public function delete($id, Request $request): RedirectResponse
+    public function delete($id, Request $request)
     {
 
         $repository = $this->getDoctrine()->getRepository(user::class) ;
         $user = $repository->findOneBy(array('id'=>$id));     
         $em = $this->getDoctrine()->getManager();
-        $em->remove($user);
-        $em->flush();
+       if( $em->remove($user)){
+        
+             $em->remove($user->getClient());
+       };
+         $em->flush();
+     
 
         // echo'supprimer';
 
-         return new RedirectResponse ($this->redirectToRoute("client"));
+         return $this->redirectToRoute("client");
     }
 
 

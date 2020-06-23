@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -75,15 +77,21 @@ class Article
      */
     private $description;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Commande", inversedBy="articles")
-     */
-    private $commande;
-
+   
     /**
      * @ORM\Column(type="datetime")
      */
     private $updateAt;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Commande", inversedBy="articles")
+     */
+    private $commande;
+
+    public function __construct()
+    {
+        $this->commande = new ArrayCollection();
+    }
 
     public function getNomArt()
     {
@@ -222,19 +230,6 @@ class Article
         return $this;
     }
 
-    public function getCommande(): ?Commande
-    {
-        return $this->commande;
-    }
-
-    public function setCommande(?Commande $commande): self
-    {
-        $this->commande = $commande;
-
-        return $this;
-    }
-
-
     /**
      * Get nOTE: This is not a mapped field of entity metadata, just a simple property.
      *
@@ -294,6 +289,32 @@ class Article
     public function setUpdateAt(\DateTimeInterface $updateAt): self
     {
         $this->updateAt = $updateAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Commande[]
+     */
+    public function getCommande(): Collection
+    {
+        return $this->commande;
+    }
+
+    public function addCommande(Commande $commande): self
+    {
+        if (!$this->commande->contains($commande)) {
+            $this->commande[] = $commande;
+        }
+
+        return $this;
+    }
+
+    public function removeCommande(Commande $commande): self
+    {
+        if ($this->commande->contains($commande)) {
+            $this->commande->removeElement($commande);
+        }
 
         return $this;
     }

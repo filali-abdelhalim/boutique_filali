@@ -42,6 +42,16 @@ class Commande
      */
     private $client;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Article", mappedBy="commande")
+     */
+    private $articles;
+
+    public function __construct()
+    {
+        $this->articles = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -100,6 +110,34 @@ class Commande
     public function setClient(?Client $client): self
     {
         $this->client = $client;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Article[]
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Article $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->addCommande($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Article $article): self
+    {
+        if ($this->articles->contains($article)) {
+            $this->articles->removeElement($article);
+            $article->removeCommande($this);
+        }
 
         return $this;
     }

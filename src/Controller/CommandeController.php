@@ -79,7 +79,7 @@ class CommandeController extends AbstractController
   foreach($panier as $id=> $quantité)
         {
           $article=  $articleRepository->find($id);
-          $article->setCommande($commande);
+          $article->addCommande($commande);
           $em->persist($article);
             $em->flush();
             $infos['quantite'][$id]  =$quantité;
@@ -170,9 +170,9 @@ class CommandeController extends AbstractController
     /**
      * @Route("admin/commande/{id}/delete", name="commande_delete")
      * @param CommandeRepository $commandeRepository
-     * @return RedirectResponse
+
      */
-    public function delete($id, Request $request): RedirectResponse
+    public function delete($id, Request $request)
     {
 
         $repository = $this->getDoctrine()->getRepository(commande::class) ;
@@ -182,8 +182,8 @@ class CommandeController extends AbstractController
         $em->flush();
 
         // echo'supprimer';
-
-         return new RedirectResponse ($this->redirectToRoute("recuper_commande"));
+         return $this->redirectToRoute("recuper_commande");
+        
     }
 
         

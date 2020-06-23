@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MarqueRepository")
@@ -21,6 +22,17 @@ class Marque
      */
     private $libelle_marque;
 
+       
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="marque",orphanRemoval=true)
+     */
+    private $articles;
+  
+
+    public function __construct()
+    {
+        $this->articles = new ArrayCollection();
+    }
    
     public function getLibelleMarque(): ?string
     {
@@ -68,4 +80,24 @@ class Marque
     }
 
 
+
+    /**
+     * Get the value of articles
+     */ 
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+
+    /**
+     * Set the value of articles
+     *
+     * @return  self
+     */ 
+    public function setArticles($articles)
+    {
+        $this->articles = $articles;
+
+        return $this;
+    }
 }

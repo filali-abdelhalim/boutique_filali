@@ -16,7 +16,6 @@ class ClientType extends AbstractType
         $builder
             ->add('nomCli')
             ->add('prenomCli')
-            ->add('date_de_naissance',DateType::class)
             ->add('adresse')
             ->add('ville')
             ->add('CP')

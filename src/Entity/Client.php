@@ -31,12 +31,6 @@ class Client
     private $prenomCli;
 
     /**
-     * @ORM\Column(type="date")
-     */
-    private $date_de_naissance;
-
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $adresse;
@@ -104,19 +98,7 @@ class Client
         return $this;
     }
 
-    public function getDateDeNaissance(): ?\DateTimeInterfaces
-    {
-        return $this->date_de_naissance;
-    }
-
-    public function setDateDeNaissance(\DateTimeInterface $date_de_naissance): self
-    {
-        $this->date_de_naissance = $date_de_naissance;
-
-        return $this;
-    }
-
-
+  
     public function getAdresse(): ?string
     {
         return $this->adresse;

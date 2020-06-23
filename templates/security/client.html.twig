@@ -12,15 +12,14 @@
 
 
  <h2> table de client  </h2>
-    <table class="table">
+    <table class="table bg-light">
 
-            <thead class="bg-light" >
+            <thead>
 
                   <tr>
                       <th> N° de client </th>  
                       <th> nom </th>  
                       <th> prenom </th>                
-                      <th> date de naissance </th>                
                       <th> adresse </th>                
                       <th> ville </th>                
                       <th> code postale </th>                
@@ -36,7 +35,6 @@
                       <td> {{ cli.getId() }}    </td>
                       <td> {{ cli.getNomCli() }}    </td>
                       <td> {{ cli.getPrenomCli() }}    </td>
-                      <td> {{ cli.getDateDeNaissance()|date('d/m/Y') }}    </td>
                       <td> {{ cli.getAdresse() }}    </td>
                       <td> {{ cli.getVille() }}    </td>
                       <td> {{ cli.getCP() }}    </td>

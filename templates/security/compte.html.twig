@@ -20,7 +20,6 @@
                       <th> N° de client </th>  
                       <th> nom </th>  
                       <th> prenom </th>                
-                      <th> date de naissance </th>                
                       <th> adresse </th>                
                       <th> ville </th>                
                       <th> code postale </th>                
@@ -39,7 +38,6 @@
                       <td> {{ compte.client.getId() }}    </td>
                       <td> {{ compte.client.getNomCli() }}    </td>
                       <td> {{ compte.client.getPrenomCli() }}    </td>
-                      <td> {{ compte.client.getDateDeNaissance()|date('d/m/Y') }}    </td>
                       <td> {{ compte.client.getAdresse() }}    </td>
                       <td> {{ compte.client.getVille() }}    </td>
                       <td> {{ compte.client.getCP() }}    </td>

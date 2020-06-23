@@ -14,7 +14,6 @@
 
   {# <main role="main"> #}
 
-      <h1>tout les produites disponibles  </h1>
 
             <div class="container d-inline">
                 
@@ -26,8 +25,9 @@
 
                             {% include 'article/filter.html.twig' with {form : form} only %} 
                         </div>
+           
 
-        <div class="bg-light displayList" >
+        <div class="bg-light displayList" style="width: 800px; height: auto" >
        
                 <div class="card-body " >
 
@@ -40,10 +40,10 @@
                         <p class="text card-text text-warning">En promotion </p>
                 {% endif %}
               
-                        {# <img src="{{ art.Image }}" class="w-50 h-50" alt="{{art.NomArt}}"> #}
-                         <img src="{{asset('images/articles/'~art.imageName) }}" style="width: 30%;height: auto" alt="...">
+                <div class="row flex ml-1" style="width: 700px; height: auto" >
+                         <img src="{{asset('images/articles/'~art.imageName) }}" style="width: 15%;height:15%;" alt="...">
 
-                        <div class="card-body">
+                        <div class="card-body" style="width: 300px; height: auto">
                             <p class="card-text">{{ art.Description|slice(0, 50) }}...</p>
                         
                               {#   pour afficher deux number apres virgule  | number_format(0,',','') #}
@@ -51,7 +51,7 @@
                                 <p class="card-text text-primary " style="font-weight: bold; font-size: 1.5rem;">{{ art.PrixInitial }} € HT </p> 
                             
                                 <p class="card-text text-primary" style="font-weight: bold; font-size: 1.5rem;">{{ art.PrixFinal }}  € TTC </p>
-
+                </div>
                                     {# <div class="btn-group"> #}
 
                                         <a href="{{ path('article_show', {"id": art.id}) }}" class="btn btn-sm btn-outline-secondary">Voir</a>
@@ -70,10 +70,18 @@
                   </div>                              
         {% endfor %}
                       </div>
-                         <div class="pagination">
-        {{ knp_pagination_render(articles) }}
-    </div>
+                          <div class="pagination">
+                            {{ knp_pagination_render(articles) }}
+                          </div>
                     </div>
+
+            <section>
+                    <img src="{{asset ('img/2.jpg')}}" class="sect">
+                    <img src="{{asset ('img/3.jpg')}}" class="sect">
+            </section>
+
+
+
                 </div>
             </div>
 

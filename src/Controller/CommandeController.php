@@ -105,7 +105,7 @@ class CommandeController extends AbstractController
 
  
     /**
-     * @Route("/liste_commande", name="recuper_commande")
+     * @Route("/admin/liste_commande", name="recuper_commande")
      */
     public function commande(CommandeRepository $commandeRepository)
     {
@@ -132,7 +132,7 @@ class CommandeController extends AbstractController
       
     } 
  
-           $total = $facture->getInfos()['montants']['total'];
+         $total = $facture->getInfos()['montants']['total'];
          $TVA = $facture->getInfos()['montants']['tva'];
          $totalGenerale =  $facture->getInfos()['montants']['general'];
 

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategorieRepository")
@@ -20,8 +21,18 @@ class Categorie
      * @ORM\Column(type="string", length=255)
      */
     private $name;
+
+    
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="categorie",orphanRemoval=true)
+     */
+    private $articles;
   
 
+    public function __construct()
+    {
+        $this->articles = new ArrayCollection();
+    }
     /**
      * Get the value of id
      */ 
@@ -71,5 +82,25 @@ class Categorie
         return $this->name;
         // to show the id of the Category in the select
         // return $this->id;
+    }
+
+    /**
+     * Get the value of articles
+     */ 
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+
+    /**
+     * Set the value of articles
+     *
+     * @return  self
+     */ 
+    public function setArticles($articles)
+    {
+        $this->articles = $articles;
+
+        return $this;
     }
 }

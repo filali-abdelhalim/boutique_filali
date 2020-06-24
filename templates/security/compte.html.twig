@@ -12,9 +12,9 @@
     <h1>information compte  </h1>
 
 
-    <table class="table">
+    <table class="table bg-light">
 
-            <thead class="bg-light" >
+            <thead  >
 
                   <tr>
                       <th> N° de client </th>  
@@ -27,7 +27,6 @@
                       
                       <th> username </th>
                       <th> email </th>
-                      <th> password </th>
 
                   </tr>
           </thead>
@@ -45,14 +44,43 @@
                      
                       <td> {{ compte.getUsername() }}    </td>
                       <td> {{ compte.getEmail() }}    </td>
-                      <td> {{ compte.getPassword() }}    </td>
-
-     
                   </tr>
 
           </tbody>
       
     </table>
+
+      <!--pour voir les facture client --> 
+
+
+    {# <h1>les achats effectueé  </h1> #}
+
+
+    {# <table class="table bg-light">
+
+            <thead >
+
+                  <tr>
+                      <th> les achats </th>
+
+                  </tr>
+          </thead>
+
+          <tbody>
+      
+                  <tr>
+                      <td> <a href="{{ path('recuper_commande')}} " >
+                           <i class="fas fa-file-pdf"></i> facture </a>
+                      </td>
+                     
+                  </tr>
+
+          </tbody>
+      
+    </table> #}
+
+      <!--pour voir les facture client --> 
+
 
    
 {% endblock %}

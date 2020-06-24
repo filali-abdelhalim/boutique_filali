@@ -8,7 +8,7 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-    <h2> table de commande </h2>
+    <h2> liste des commandes </h2>
 
     <table class="table bg-light" >
 
@@ -20,12 +20,15 @@
                  <th> N° de client  </th>
                  <th> Date de commande </th>
                  <th> livree </th>
-                 <th> imprission </th>
-                 <th> supprission </th>
+                 <th> impression </th>
+              {% if is_granted('ROLE_ADMIN') %} 
+                 <th> suppression </th>
+                 {% endif %}
              </tr>
      </thead>
 
      <tbody>
+ 
      {% for com in commande %}
             <tr>
             {# <img src="{{ Art.article.Image }}" class="d-block w-50 h-50"> #}
@@ -38,11 +41,12 @@
                  <i class="fas fa-file-pdf"> </i> imprimer </a>
 
                 </td>
-                <td> <a href="{{ path('commande_delete',{"id": com.getId()}) }} " >
+                 {% if is_granted('ROLE_ADMIN') %} 
+                 <td> <a href="{{ path('commande_delete',{"id": com.getId()}) }} " >
                 <i class="fas fa-trash-alt"></i> supprission </a> </td>
-
-
-            </tr>
+                 {% endif %}
+              
+  
     {% endfor %}
 
     </tbody>

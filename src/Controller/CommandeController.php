@@ -34,10 +34,8 @@ class CommandeController extends AbstractController
         }
     
      
-     
-      $user = $this->getUser();
-    
-      
+       $user = $this->getUser();
+          
        $panier = $session->get('panier',[]);
        $facture  = new Facture();
         if (!empty($panier)) {
@@ -69,8 +67,8 @@ class CommandeController extends AbstractController
             $commande->setLivree(1);
                    
             $em->persist($commande);
-           
             $em->flush();
+
             $qte = [];
             $infos = [];
             $infos['montants']['total'] = $total;
@@ -105,13 +103,25 @@ class CommandeController extends AbstractController
 
  
     /**
-     * @Route("/admin/liste_commande", name="recuper_commande")
+     * @Route("/liste_commande", name="recuper_commande")
      */
     public function commande(CommandeRepository $commandeRepository)
     {
 
+     
+      if ($this->getUser()->getRoles()[0]=='ROLE_ADMIN') {
+        $commandes = $commandeRepository->findAll() ;
+
+      }
+      else {
+        $id = $this->getUser()->getClient()->getId();
+       
+        $commandes = $commandeRepository->findByClient($id);
+
+
+      }
     
-       return $this->render('commande/commande.html.twig', [ 'commande'=>$commandeRepository->findAll() ]);
+       return $this->render('commande/commande.html.twig', [ 'commande'=> $commandes]);
     }
 
     
@@ -188,9 +198,9 @@ class CommandeController extends AbstractController
 
         
 }
-//  on a fait jointure entre commande et article
- // on a fait jointure entre commande et client 
- // on a fait jointure entre commande et facture
+//  je  fais jointure entre commande et article
+ // je fais  jointure entre commande et client 
+ // je fais jointure entre commande et facture
 // Premiere etape: creer une nouvelle facture pour recueper l'id pour l'utiliser dans commande
 
 // deuxieme etape: recuperer id user pour recuperer l'objet client associe

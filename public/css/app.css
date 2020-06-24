@@ -11,6 +11,14 @@ body {
       padding: 0px 0px 10px 10px ;
 }
 
+.video{
+     width:350px;
+     height:250px;
+     display: inline-flex;
+     flex-direction: row;
+     justify-content: center;
+}
+
   section {
     
     animation-duration: 10s;

@@ -12,12 +12,69 @@ body {
 }
 
 .video{
-     width:350px;
-     height:250px;
+     width:600px;
+     height:400px;
      display: inline-flex;
      flex-direction: row;
      justify-content: center;
 }
+
+.titre{
+    justify-content: center;  /* text-align: center; */
+    text-transform: capitalize;
+    font-weight: bold;
+    display: flex;
+
+}
+
+
+@media screen and (min-width:961px) {
+    #menu-demo2  {
+          width: 100%;
+            height: auto;
+        
+          }
+          /* article .video{
+            width: 50%;
+            height: auto;
+          }
+          div .video2{
+              width: 50%;
+              
+          } */
+         
+  }
+
+
+@media screen and (min-width:401px) and (max-width:960px){
+        .carou  {
+          width: 50%;
+          height: auto;
+          }
+        #menu-demo2 article .video{
+            width: 100%;
+            height: auto;
+          }
+        
+  
+  }
+  @media screen and (max-width:400px){
+    div #demo  {
+          width: 20%;
+          height: auto;
+          }
+       /* article .video{
+          width: 100%;
+          height: auto;
+        } */
+  
+  } 
+
+
+
+
+
+
 
   section {
     

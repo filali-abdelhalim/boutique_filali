@@ -5,7 +5,7 @@
         "php": "^7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "dompdf/dompdf": "^0.8.5",
+        "dompdf/dompdf": "^2.0.2",
         "knplabs/knp-markdown-bundle": "^1.8",
         "knplabs/knp-paginator-bundle": "^5.2",
         "symfony/asset": "5.0.*",
